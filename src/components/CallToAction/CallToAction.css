@@ -1,0 +1,37 @@
+/* src/components/CallToAction/CallToAction.css */
+
+.cta {
+  padding: 4rem 0;
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  text-align: center;
+}
+
+.cta-heading {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-subtext {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--secondary-pink);
+}
+
+.cta-btn {
+  background-color: var(--bright-orange);
+  color: var(--pure-white);
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: var(--vibrant-red);
+}
