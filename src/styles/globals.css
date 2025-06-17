@@ -1,0 +1,97 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Montserrat:wght@300;600&display=swap');
+
+/* index.css */
+
+/* CSS Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--pure-white);
+  color: var(--black);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* Color Variables */
+:root {
+  /* 🎨 Primary Brand Colors */
+  --deep-magenta: #921C5D;
+  --bright-pink: #C42365;
+  --vibrant-red: #E63C5F;
+  --bright-orange: #FA5C46;
+  --pure-white: #FFFFFF;
+
+  /* 🌑 Neutrals and Text Colors */
+  --black: #111111;
+  --dark-gray: #333333;
+  --medium-gray: #666666;
+  --light-gray: #CCCCCC;
+  --extra-light-gray: #F5F5F5;
+
+  /* 🖱️ Hover States */
+  --hover-bg: #fce4ec;               /* very light pinkish background */
+  --hover-bg-secondary: #ffece6;     /* very light orange-tint background */
+  --hover-text: var(--deep-magenta);
+  --hover-border: var(--vibrant-red);
+
+  /* ✏️ Text Highlighting */
+  --highlight-text: var(--vibrant-red);
+  --highlight-bg: #fff0f3;
+
+  /* 🟪 Secondary Accent Colors */
+  --secondary-pink: #e68cab;
+  --secondary-orange: #ff9a7b;
+
+  /* 🔗 Link and Underline */
+  --link-color: var(--bright-pink);
+  --underline-color: var(--bright-orange);
+}
+
+[data-theme="dark"] {
+  --pure-white: #111111;
+  --black: #FFFFFF;
+  --dark-gray: #E0E0E0;
+}
+
+
+
+/* Utility Classes (optional, can grow over time) */
+.container {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--bright-pink);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}

@@ -1,18 +1,54 @@
 /* src/App.css */
-
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif; /* Matching your hero section font */
   background-color: var(--pure-white);
   color: var(--dark-gray);
+  overflow-x: hidden; /* Prevents horizontal overflow */
+  width: 100%;
 }
 
 main {
   flex: 1;
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
+  padding: 2rem 0; /* Vertical padding only */
+}
+
+/* Container for content that needs max-width */
+.content-container {
+  width: 100%;
+  max-width: 1400px; /* Slightly larger than 1200px for modern screens */
+  margin: 0 auto;
+  padding: 0 2rem; /* Horizontal padding only */
+  box-sizing: border-box;
+}
+
+/* Full-width sections can use this */
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 2rem 0; /* Vertical padding */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 0 1.5rem;
+  }
+  
+  main {
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-container {
+    padding: 0 1rem;
+  }
 }
