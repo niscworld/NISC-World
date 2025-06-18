@@ -1,0 +1,138 @@
+/* Contact Section */
+.contact-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--pure-white);
+  color: var(--dark-gray);
+}
+
+
+.contact-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.contact-header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--bright-pink);
+}
+
+.contact-header p {
+  font-size: 1.1rem;
+  color: var(--medium-gray);
+}
+
+.dark .contact-header p {
+  color: var(--light-gray);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--pure-white);
+  color: var(--dark-gray);
+  transition: all 0.3s ease;
+}
+
+.dark .contact-form input,
+.dark .contact-form textarea {
+  background: rgba(30,30,30,0.7);
+  border-color: var(--dark-gray);
+  color: var(--light-gray);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--bright-pink);
+  box-shadow: 0 0 0 2px rgba(196,35,101,0.2);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.error {
+  border-color: var(--vibrant-red) !important;
+}
+
+.error-text {
+  color: var(--vibrant-red);
+  font-size: 0.85rem;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: linear-gradient(45deg, var(--bright-pink), var(--bright-orange));
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.success-message {
+  color: #4BB543;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.error-message {
+  color: var(--vibrant-red);
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 2rem 1rem;
+  }
+  
+  .contact-header h2 {
+    font-size: 1.8rem;
+  }
+}

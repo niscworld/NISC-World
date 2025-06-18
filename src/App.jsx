@@ -5,10 +5,10 @@ import { useTheme } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer/Footer';
 import Home from './pages/Home';
+import Contact from './pages/Contact';
 // import About from './pages/About';
 // import Projects from './pages/Projects';
 // import Blog from './pages/Blog';
-// import Contact from './pages/Contact';
 import './App.css';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/projects" element={<Projects />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
-          {/* <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />
