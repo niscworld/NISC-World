@@ -80,14 +80,14 @@ const Hero = () => {
         >
           <span className="gradient-text">NISC World</span>
           <br />
-          <motion.span 
+          <motion.h2 
             className="subtitle"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
             Naksh Innovative Solutions Consultancy
-          </motion.span>
+          </motion.h2>
         </motion.h1>
         
         <motion.p 
@@ -96,7 +96,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          "All your tech needs meet here"
+          "DREAM. DEVELOP. DEFINE."
         </motion.p>
 
         <motion.div 

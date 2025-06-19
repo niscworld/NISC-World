@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import { FaLinkedin, FaTwitter, FaGithub, FaUserTie } from 'react-icons/fa';
+import defaultUserImage from './assets/default_user.jpg';
 import srinivasPhoto from './assets/Srinu.jpg';
 import rushvithaPhoto from './assets/Rushvitha.jpg';
 import './Team.css';
@@ -19,7 +20,8 @@ const Team = () => {
         twitter: "#",
         github: "#"
       },
-      photo: rushvithaPhoto
+      photo: rushvithaPhoto,
+      visible: true
     },
     {
       name: "K Srinivas Charan",
@@ -30,7 +32,80 @@ const Team = () => {
         twitter: "#",
         github: "#"
       },
-      photo: srinivasPhoto
+      photo: srinivasPhoto,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Chief Technology Officer (CTO)",
+      bio: "Oversees all technical aspects and technological resources.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Chief Financial Officer (CFO)",
+      bio: "Manages the company's finances, including financial planning.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Director of Development",
+      bio: "Leads development teams and ensures timely delivery.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Director of Testing",
+      bio: "Ensures product quality through rigorous testing processes.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Director of Security",
+      bio: "Responsible for overseeing the company's data and infrastructure security.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true
+    },
+    {
+      name: "---",
+      role: "Director of Human Resources (HR)",
+      bio: "Handles recruitment, employee relations, and organizational development.",
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        github: "#"
+      },
+      photo: defaultUserImage,
+      visible: true // Example of a hidden member
     }
   ];
 
@@ -47,7 +122,7 @@ const Team = () => {
         </div>
 
         <div className="team-grid">
-          {teamMembers.map((member, index) => (
+          {teamMembers.filter(member => member.visible).map((member, index) => (
             <motion.div 
               key={index}
               className={`team-card ${isDarkMode ? 'dark' : 'light'}`}
