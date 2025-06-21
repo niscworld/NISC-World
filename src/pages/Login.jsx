@@ -1,17 +1,54 @@
-// src/pages/Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import API from './../api/MainApi.js'; // ✅ Import API endpoint
+import API from './../api/MainApi.js';
+import { refreshToken } from '../utils/refreshToken'; // ✅ Import the refresh utility
 
 function Login() {
   const navigate = useNavigate();
+
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');      // ✅ Message box state
-  const [messageType, setMessageType] = useState(''); // success | error | info
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
+  // ✅ Try auto-login if tokens are in localStorage
+  useEffect(() => {
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem('token');
+    const refresh_token = localStorage.getItem('refresh_token');
+
+    if (user_id && token && refresh_token) {
+      const expiry = localStorage.getItem('expires_at');
+      const expiryDate = new Date(expiry);
+      const now = new Date();
+
+      if (expiryDate > now) {
+        console.log('[AUTO-LOGIN] Token still valid. Redirecting...');
+        setTimeout(() => navigate('/dashboard'), 500);
+      } else {
+        console.log('[AUTO-LOGIN] Token expired. Attempting refresh...');
+        refreshToken()
+          .then(result => {
+            if (result.success) {
+              setMessage('Auto-login successful!');
+              setMessageType('success');
+              setTimeout(() => navigate('/dashboard'), 1000);
+            } else {
+              setMessage('Session expired. Please login again.');
+              setMessageType('error');
+            }
+          })
+          .catch(() => {
+            setMessage('Auto-login error. Please login.');
+            setMessageType('error');
+          });
+      }
+    }
+  }, []);
+
+  // ✅ Manual login
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -26,17 +63,20 @@ function Login() {
         },
         body: JSON.stringify({ id, password }),
       });
-
+      
       const data = await response.json();
 
+      
       if (response.ok) {
         setMessage('Login successful! Redirecting...');
         setMessageType('success');
 
-        // Optionally save token
-        // localStorage.setItem('token', data.token);
+        // ✅ Save everything
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('user_id', data.user);
+        localStorage.setItem('expires_at', data.expires_at);
 
-        // Delay a bit before redirecting
         setTimeout(() => navigate('/dashboard'), 1500);
       } else {
         setMessage(data.message || 'Invalid credentials.');
@@ -56,12 +96,7 @@ function Login() {
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Login</h2>
 
-        {/* ✅ Message Box */}
-        {message && (
-          <div className={`message-box ${messageType}`}>
-            {message}
-          </div>
-        )}
+        {message && <div className={`message-box ${messageType}`}>{message}</div>}
 
         <input
           type="text"
