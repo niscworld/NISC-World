@@ -1,4 +1,7 @@
-const BASE_URL = 'https://nisc-world-backend.onrender.com';
+const DEVELOPMENT_MODE = false;
+
+const BASE_URL = DEVELOPMENT_MODE ? 'http://127.0.0.1:5000' : 'https://nisc-world-backend.onrender.com';
+
 
 const ACCOUNTS_URL = `${BASE_URL}/accounts`
 
