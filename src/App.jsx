@@ -6,6 +6,8 @@ import Navbar from './components/layout/Navbar/Navbar';
 import Footer from './components/layout/Footer/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import Dashboard from './pages/Dashboard.jsx';
+import Internships from './pages/Internships.jsx';
 // import About from './pages/About';
 // import Projects from './pages/Projects';
 // import Blog from './pages/Blog';
@@ -27,6 +29,8 @@ function App() {
           {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} /> {/* ✅ New route */}
+          <Route path="/dashboard" element={<Dashboard />} /> {/* ✅ New route */}
+          <Route path="/internships" element={<Internships />} /> {/* ✅ New route */}
           <Route path="*" element={<NotFound />} /> {/* ✅ Catch-all route */}
         </Routes>
       </main>

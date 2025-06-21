@@ -37,9 +37,10 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/contact', label: 'Contact' },
+    { path: '/internships', label: 'Internships' },
     isLoggedIn
-      ? { path: '#logout', label: 'Logout', onClick: handleLogout }
-      : { path: '/login', label: 'Login' },
+    ? { path: '#logout', label: 'Logout', onClick: handleLogout }
+    : { path: '/login', label: 'Login' },
   ];
 
   return (

@@ -14,7 +14,23 @@ class API {
   static LOGIN_ENDPOINT = `${API.ACCOUNTS_API}/login`;
   static LOGOUT_ENDPOINT = `${API.ACCOUNTS_API}/logout`;
   static REFRESH_TOKEN_ENDPOINT = `${API.ACCOUNTS_API}/refresh-token`;
-}  
+
+
+  static INTERNSHIPS = `${API.BASE_URL}/internships`
+  static INTERNSHIPS_API = `${API.INTERNSHIPS}/api`
+  static GET_INTERNSHIPS = `${API.INTERNSHIPS_API}/get-internships`
+  
+  // Dashboard
+  static DASHBOARD = `${API.BASE_URL}/dashboard`;
+  static DASHBOARD_API = `${API.DASHBOARD}/api`;
+
+  static DASHBOARD_DEVELOPER = `${API.DASHBOARD}/developer`;
+  static DASHBOARD_DEVELOPER_ENDPOINT = `${API.DASHBOARD_DEVELOPER}/api`;
+
+  static DEVELOPER_CREATE_USER = `${API.DASHBOARD_DEVELOPER_ENDPOINT}/create-user`;
+  static DEVELOPER_CREATE_INTERNSHIP = `${API.DASHBOARD_DEVELOPER_ENDPOINT}/create-internship`;
+
+}
 
 
 // Export all
