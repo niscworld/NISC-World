@@ -1,19 +1,15 @@
 const DEVELOPMENT_MODE = false;
 
-const BASE_URL = DEVELOPMENT_MODE ? 'http://127.0.0.1:5000' : 'https://nisc-world-backend.onrender.com';
-
-
-const ACCOUNTS_URL = `${BASE_URL}/accounts`
-
-const API_URL = `${BASE_URL}/api/v1`;
-const ACCOUNTS_API = `${ACCOUNTS_URL}/api`
-
-const CONTACT_ENDPOINT = `${API_URL}/sendMail`;
-const LOGIN_ENDPOINT = `${ACCOUNTS_API}/login`
+class API {
+  static DEVELOPMENT_MODE = DEVELOPMENT_MODE;
+  static BASE_URL = API.DEVELOPMENT_MODE ? 'http://127.0.0.1:5000' : 'https://nisc-world-backend.onrender.com';
+  static ACCOUNTS_URL = `${API.BASE_URL}/accounts`;
+  static API_URL = `${API.BASE_URL}/api/v1`;
+  static ACCOUNTS_API = `${API.ACCOUNTS_URL}/api`;
+  static CONTACT_ENDPOINT = `${API.API_URL}/sendMail`;
+  static LOGIN_ENDPOINT = `${API.ACCOUNTS_API}/login`;
+}  
 
 
 // Export all
-export {
-  CONTACT_ENDPOINT,
-  LOGIN_ENDPOINT
-};
+export default API;

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import { LOGIN_ENDPOINT } from './../api/MainApi.js'; // ✅ Import API endpoint
+import API from './../api/MainApi.js'; // ✅ Import API endpoint
 
 function Login() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Login() {
     setMessageType('info');
 
     try {
-      const response = await fetch(LOGIN_ENDPOINT, {
+      const response = await fetch(API.LOGIN_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import './Contact.css';
-import { CONTACT_ENDPOINT } from '../api/MainApi';
+import API from '../api/MainApi';
 
 const Contact = () => {
   const { isDarkMode } = useTheme();
@@ -44,7 +44,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(CONTACT_ENDPOINT, {
+      const response = await fetch(API.CONTACT_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
