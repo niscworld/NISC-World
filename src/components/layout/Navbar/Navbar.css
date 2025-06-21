@@ -5,18 +5,32 @@
   align-items: center;
   padding: 1.5rem 5%;
   background-color: var(--pure-white);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
+  box-shadow: 0 -10px 50px var(--light-gray);
+  position: fixed;
+  width: 100%;
   z-index: 100;
+  zoom: 0.7;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* adds space between image and text */
+  text-decoration: none; /* optional: remove link underline */
+}
+
+.logo img {
+  width: 100px;
+}
+
+.logo-text {
   font-weight: 700;
   font-size: 1.8rem;
   color: var(--bright-pink);
   font-family: 'Montserrat', sans-serif;
   letter-spacing: -0.5px;
 }
+
 
 .nav-links {
   display: flex;

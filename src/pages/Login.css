@@ -1,0 +1,105 @@
+/* src/pages/Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  /* background: var(--extra-light-gray); */
+  background-color: var(--pure-white);
+  padding: 20px;
+}
+
+.login-form {
+  background-color: var(--pure-white);
+  color: var(--dark-gray);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px var(--dark-gray);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-form h2 {
+  text-align: center;
+  color: var(--deep-magenta);
+  margin-bottom: 10px;
+}
+
+.login-form input {
+  padding: 12px;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  background-color: var(--extra-light-gray);
+  color: black;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: var(--bright-pink);
+  background-color: #fff;
+  outline: none;
+}
+
+.login-form button {
+  padding: 12px;
+  background-color: var(--bright-pink);
+  border: none;
+  border-radius: 8px;
+  color: var(--pure-white);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-form button:hover {
+  background-color: var(--vibrant-red);
+  transform: translateY(-2px);
+}
+
+.login-form button:active {
+  background-color: var(--deep-magenta);
+}
+
+.login-form a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.3s;
+}
+
+.login-form a:hover {
+  color: var(--underline-color);
+}
+
+
+.message-box {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.message-box.info {
+  background-color: var(--hover-bg-secondary);
+  color: var(--hover-text);
+  border: 1px solid var(--hover-border);
+}
+
+.message-box.success {
+  background-color: #e6ffed;
+  color: #1e7f34;
+  border: 1px solid #34c759;
+}
+
+.message-box.error {
+  background-color: #ffe6e6;
+  color: var(--vibrant-red);
+  border: 1px solid var(--vibrant-red);
+}

@@ -11,21 +11,21 @@ const projects = [
     title: "My Home Water Supply",
     description: "A digital platform for water delivery management with real-time tracking and payment integration.",
     tags: ["React", "Node.js", "MongoDB"],
-    link: "https://nisc.co.in/app/water",
+    link: "/app/water",
     image: defaultImage
   },
   {
     title: "Clinic Appointment",
     description: "Online booking system for medical appointments with doctor scheduling and reminders.",
     tags: ["Vue.js", "Firebase", "Twilio"],
-    link: "https://nisc.co.in/app/clinicAppointment",
+    link: "/app/clinicAppointment",
     image: defaultImage
   },
   {
     title: "Pill Report",
     description: "Inventory management system for pharmacies with bill generation and stock alerts.",
     tags: ["Angular", "Python", "SQL"],
-    link: "https://nisc.co.in/app/pillReport",
+    link: "/app/pillReport",
     image: defaultImage
   }
 ];

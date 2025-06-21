@@ -2,13 +2,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useTheme } from './context/ThemeContext';
-import Navbar from './components/layout/Navbar';
+import Navbar from './components/layout/Navbar/Navbar';
 import Footer from './components/layout/Footer/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 // import About from './pages/About';
 // import Projects from './pages/Projects';
 // import Blog from './pages/Blog';
+import Login from './pages/Login.jsx';
+import NotFound from './pages/NotFound'; // ✅ Import 404 page
 import './App.css';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           {/* <Route path="/projects" element={<Projects />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} /> {/* ✅ New route */}
+          <Route path="*" element={<NotFound />} /> {/* ✅ Catch-all route */}
         </Routes>
       </main>
       <Footer />

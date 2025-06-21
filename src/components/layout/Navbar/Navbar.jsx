@@ -1,9 +1,10 @@
 // src/components/layout/Navbar.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../../context/ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import logo from './assets/logo.png'
 import './Navbar.css';
 
 const Navbar = () => {
@@ -14,13 +15,15 @@ const Navbar = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     // { path: '/projects', label: 'Projects' },
-    { path: '/contact', label: 'Contact' }
+    { path: '/contact', label: 'Contact' },
+    { path: '/login', label: 'Login' },
   ];
 
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        NISC World
+        <img src={logo} alt="Logo" />
+        <span className="logo-text">NISC World</span>
       </Link>
 
       {/* Desktop Navigation */}
