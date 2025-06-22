@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
+import AppWrapper from '../context/AppWrapper.jsx';
+
 import DeveloperSidebar from './../components/Dashboard/Developer/DeveloperSidebar.jsx';
 import DeveloperMainPanel from './../components/Dashboard/Developer/DeveloperMainPanel.jsx';
 import OwnerSidebar from './../components/Dashboard/Owner/OwnerSidebar.jsx';
@@ -53,10 +56,12 @@ function Dashboard() {
   };
 
   return (
+            <AppWrapper>
     <div className="dashboard-container">
       <div className="sidebar-panel">{renderSidebar()}</div>
       <div className="content-panel">{renderContent()}</div>
     </div>
+        </AppWrapper>
   );
 }
 
