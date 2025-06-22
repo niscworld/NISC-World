@@ -5,6 +5,8 @@ import OwnerSidebar from './../components/Dashboard/Owner/OwnerSidebar.jsx';
 import OwnerMainPanel from './../components/Dashboard/Owner/OwnerMainPanel.jsx';
 import InternSidebar from './../components/Dashboard/Intern/InternSidebar.jsx';
 import InternMainPanel from './../components/Dashboard/Intern/InternMainPanel.jsx';
+import HRSidebar from '../components/Dashboard/HR/HRSidebar.jsx';
+import HRMainPanel from '../components/Dashboard/HR/HRMainPanel.jsx';
 // 🔄 Import more roles as needed
 
 import './Dashboard.css'; // Add styling later
@@ -26,6 +28,8 @@ function Dashboard() {
         return <OwnerSidebar onSelect={setSelectedTab} />;
       case 'Intern':
         return <InternSidebar onSelect={setSelectedTab} />;
+      case 'HR':
+        return <HRSidebar onSelect={setSelectedTab} />;
       // 🔄 Add more roles
       default:
         return <div className="sidebar">No Access</div>;
@@ -40,6 +44,8 @@ function Dashboard() {
         return <OwnerMainPanel selectedTab={selectedTab} />;
       case 'Intern':
         return <InternMainPanel selectedTab={selectedTab} />;
+      case 'HR':
+        return <HRMainPanel selectedTab={selectedTab} />;
       // 🔄 Add more roles
       default:
         return <div className="content-panel">No content</div>;
