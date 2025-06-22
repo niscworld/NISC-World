@@ -1,12 +1,9 @@
-// components/Dashboard/Developer/CreateUserForm.jsx
 import React, { useState } from 'react';
 import API from './../../../api/MainApi';
 import './CreateUserForm.css';
 
-
 function CreateUserForm() {
   const [formData, setFormData] = useState({
-    user_id: '',
     password: '',
     fullname: '',
     email: '',
@@ -29,12 +26,10 @@ function CreateUserForm() {
     setMessage('Creating user...');
     setMessageType('info');
 
-    // Construct payload
     const submissionData = {
-      user_id: formData.user_id.trim(),
       password: formData.password,
       fullname: formData.fullname.trim() || 'NO NAME',
-      position: formData.position
+      position: formData.position.trim()
     };
 
     if (formData.email.trim()) {
@@ -44,24 +39,26 @@ function CreateUserForm() {
     try {
       const res = await fetch(`${API.DEVELOPER_CREATE_USER}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData)
       });
 
       const result = await res.json();
 
       if (res.ok) {
-        setMessage('✅ User created successfully!');
+        setMessage(`✅ User created successfully! Generated ID: ${result.user_id} Password: ${result.password}`);
         setMessageType('success');
         setFormData({
-          user_id: '',
           password: '',
           fullname: '',
           email: '',
           position: ''
         });
+        // Copy to clipboard
+        const textToCopy = `Username: ${result.user_id}\nPassword: ${result.password}`;
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => console.log('📋 Credentials copied to clipboard!'))
+          .catch(err => console.error('❌ Clipboard copy failed:', err));
       } else {
         setMessage(result.message || '❌ Failed to create user.');
         setMessageType('error');
@@ -81,13 +78,6 @@ function CreateUserForm() {
       {message && <div className={`message ${messageType}`}>{message}</div>}
       <form onSubmit={handleSubmit}>
         <input
-          name="user_id"
-          placeholder="User ID"
-          required
-          value={formData.user_id}
-          onChange={handleChange}
-        />
-        <input
           name="password"
           placeholder="Password"
           type="password"
@@ -97,7 +87,7 @@ function CreateUserForm() {
         />
         <input
           name="fullname"
-          placeholder="Full Name (optional, defaults to NO NAME)"
+          placeholder="Full Name (optional)"
           value={formData.fullname}
           onChange={handleChange}
         />
@@ -115,10 +105,27 @@ function CreateUserForm() {
           onChange={handleChange}
         >
           <option value="">-- Select Position --</option>
+          <option value="User">User</option>
+          <option value="Client">Client</option>
+
           <option value="Intern">Intern</option>
+          <option value="Trainee">Trainee</option>
+
           <option value="HR">HR</option>
+
+          <option value="Admin">Admin</option>
+          <option value="COE">COE</option>
+          <option value="CTO">CTO</option>
+          <option value="CFO">CFO</option>
+          <option value="CHRO">CHRO</option>
+          <option value="DOD">DOD</option>
+          <option value="DOT">DOT</option>
+          <option value="DOS">DOS</option>
+
           <option value="Employee">Employee</option>
-          {/* Add more if needed */}
+          <option value="Staff">Staff</option>
+
+          <option value="Owner">Owner</option>
         </select>
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Creating...' : 'Create'}
