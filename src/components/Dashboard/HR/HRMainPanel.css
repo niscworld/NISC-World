@@ -1,0 +1,22 @@
+.hr-main-panel {
+  padding: 1.5rem;
+}
+
+.hr-heading {
+  color: var(--deep-magenta);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.hr-panel-message {
+  padding: 1rem;
+  color: var(--medium-gray);
+}
+
+.hr-panel-content {
+  /* background-color: var(--extra-light-gray); */
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px var(--extra-light-gray);;
+  transition: all 0.3s ease;
+}

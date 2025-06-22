@@ -1,0 +1,93 @@
+.view-applicants {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.internship-section {
+  background: var(--medium-gray);
+  padding: 1.5rem;
+  border-left: 6px solid var(--bright-pink);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.internship-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.internship-title {
+  color: var(--pure-white);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.internship-details {
+  font-size: 0.95rem;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.hr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.hr-table thead {
+  background: var(--bright-pink);
+  color: var(--pure-white);
+}
+
+.hr-table th,
+.hr-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--light-gray);
+  vertical-align: top;
+}
+
+.hr-table tbody tr:hover {
+  background-color: var(--pure-white);
+}
+
+.hr-table a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.hr-table textarea {
+  border: 1px solid var(--light-gray);
+  border-radius: 6px;
+  padding: 6px;
+  resize: vertical;
+  font-size: 0.85rem;
+}
+
+.hr-table button {
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.hr-table button:hover {
+  background-color: var(--vibrant-red);
+}
+
+.hr-table button:disabled {
+  background-color: var(--light-gray);
+  cursor: not-allowed;
+}
+
+.action-status {
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: var(--medium-gray);
+}

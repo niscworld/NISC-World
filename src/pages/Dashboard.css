@@ -1,0 +1,153 @@
+/* Dashboard.css */
+
+/* Layout */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--extra-light);
+  color: var(--black);
+}
+
+.sidebar-panel {
+  width: 280px;
+  background: var(--pure-white);
+  border-right: 1px solid var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+}
+
+.combined-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.common-sidebar {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--light-gray);
+  /* background: var(--extra-light-gray); */
+  animation: fadeIn 0.3s ease-in;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  font-size: 2rem;
+  margin-right: 0.8rem;
+}
+
+.profile-details span {
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.profile-details small {
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+}
+
+.common-links {
+  list-style: none;
+  padding: 0;
+}
+
+.common-links li {
+  padding: 0.6rem 0.8rem;
+  margin: 0.3rem 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.common-links li:hover {
+  background: var(--hover-bg);
+  color: var(--hover-text);
+}
+
+.common-links .logout {
+  color: var(--vibrant-red);
+}
+
+.role-sidebar {
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Content Panel */
+.content-panel {
+  flex-grow: 1;
+  padding: 2rem;
+  background: var(--pure-white);
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+.main-panel {
+  padding: 1rem 2rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.main-panel-heading {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--bright-pink);
+  margin-bottom: 1rem;
+}
+
+.dev-table-wrapper {
+  overflow-x: auto;
+}
+
+.dev-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.dev-table th,
+.dev-table td {
+  border: 1px solid var(--light-gray);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.dev-table th {
+  background-color: var(--vibrant-red);
+  color: var(--black);
+}
+
+.dev-table tr:hover {
+  background-color: var(--hover-bg-secondary);
+  color: var(--hover-text);
+  transition: background 0.2s ease;
+}

@@ -10,9 +10,8 @@ import InternSidebar from './../components/Dashboard/Intern/InternSidebar.jsx';
 import InternMainPanel from './../components/Dashboard/Intern/InternMainPanel.jsx';
 import HRSidebar from '../components/Dashboard/HR/HRSidebar.jsx';
 import HRMainPanel from '../components/Dashboard/HR/HRMainPanel.jsx';
-// 🔄 Import more roles as needed
 
-import './Dashboard.css'; // Add styling later
+import './Dashboard.css';
 
 function Dashboard() {
   const [role, setRole] = useState('');
@@ -23,20 +22,57 @@ function Dashboard() {
     setRole(position || '');
   }, []);
 
+  const commonSidebar = () => (
+    <div className="common-sidebar">
+      <div className="profile-section">
+        <div className="profile-pic">👤</div>
+        <div className="profile-details">
+          <span>{localStorage.getItem('user_id') || 'User'}</span>
+          <br />
+          <small>{role}</small>
+        </div>
+      </div>
+      <ul className="common-links">
+        <li onClick={() => setSelectedTab('profile')}>👁️ View Profile</li>
+        <li onClick={() => setSelectedTab('edit-profile')}>✏️ Edit Profile</li>
+        <li
+          className="logout"
+          onClick={() => {
+            localStorage.clear();
+            window.location.href = '/login';
+          }}
+        >
+          🚪 Logout
+        </li>
+      </ul>
+    </div>
+  );
+
   const renderSidebar = () => {
+    let roleSidebar;
     switch (role) {
       case 'Developer':
-        return <DeveloperSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <DeveloperSidebar onSelect={setSelectedTab} />;
+        break;
       case 'Owner':
-        return <OwnerSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <OwnerSidebar onSelect={setSelectedTab} />;
+        break;
       case 'Intern':
-        return <InternSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <InternSidebar onSelect={setSelectedTab} />;
+        break;
       case 'HR':
-        return <HRSidebar onSelect={setSelectedTab} />;
-      // 🔄 Add more roles
+        roleSidebar = <HRSidebar onSelect={setSelectedTab} />;
+        break;
       default:
-        return <div className="sidebar">No Access</div>;
+        roleSidebar = <div className="sidebar">No Access</div>;
     }
+
+    return (
+      <div className="combined-sidebar">
+        {commonSidebar()}
+        <div className="role-sidebar">{roleSidebar}</div>
+      </div>
+    );
   };
 
   const renderContent = () => {
@@ -49,19 +85,18 @@ function Dashboard() {
         return <InternMainPanel selectedTab={selectedTab} />;
       case 'HR':
         return <HRMainPanel selectedTab={selectedTab} />;
-      // 🔄 Add more roles
       default:
         return <div className="content-panel">No content</div>;
     }
   };
 
   return (
-            <AppWrapper>
-    <div className="dashboard-container">
-      <div className="sidebar-panel">{renderSidebar()}</div>
-      <div className="content-panel">{renderContent()}</div>
-    </div>
-        </AppWrapper>
+    <AppWrapper>
+      <div className="dashboard-container">
+        <div className="sidebar-panel">{renderSidebar()}</div>
+        <div className="content-panel">{renderContent()}</div>
+      </div>
+    </AppWrapper>
   );
 }
 

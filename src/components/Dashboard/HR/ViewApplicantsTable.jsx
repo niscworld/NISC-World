@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../../api/MainApi';
-// import './ViewApplicantsTable.css';
+import './ViewApplicantsTable.css';
 
 function ViewApplicantsTable() {
   const [groupedApplicants, setGroupedApplicants] = useState({});

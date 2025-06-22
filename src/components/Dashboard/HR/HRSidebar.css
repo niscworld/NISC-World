@@ -1,0 +1,36 @@
+.hr-sidebar {
+  padding: 1.5rem;
+  /* background-color: var(--extra-light-gray); */
+  height: 100%;
+  /* border-right: 2px solid var(--light-gray); */
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar-title {
+  color: var(--deep-magenta);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-list li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--dark-gray);
+  transition: all 0.3s, color 0.3s;
+  font-weight: 500;
+}
+
+.sidebar-list li:hover {
+  background-color: transparent;
+  color: var(--hover-text);
+  border-left: 4px solid var(--vibrant-red);
+}

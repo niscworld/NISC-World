@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import API from '../api/MainApi';
+import './AppWrapper.css';
 
 function AppWrapper({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -24,7 +25,6 @@ function AppWrapper({ children }) {
           setIsLoggedIn(true);
         } else {
           // Session expired, try to refresh
-          setIsLoggedIn(false);
           try {
             const res = await fetch(API.REFRESH_TOKEN_ENDPOINT, {
               method: 'POST',
@@ -40,10 +40,12 @@ function AppWrapper({ children }) {
 
             if (res.ok && data.token) {
               localStorage.setItem('token', data.token);
-              // Optionally update expiry timestamp here
+
+              // Decode new expiry time from token
               const newExp = JSON.parse(atob(data.token.split('.')[1])).exp;
               const newExpiryDate = new Date(newExp * 1000).toISOString();
               localStorage.setItem('expires_at', newExpiryDate);
+
               setIsLoggedIn(true);
             } else {
               throw new Error('Refresh failed');
@@ -55,6 +57,7 @@ function AppWrapper({ children }) {
           }
         }
       } else {
+        // No session found
         setIsLoggedIn(false);
         setShowSessionExpired(true);
       }
@@ -74,13 +77,13 @@ function AppWrapper({ children }) {
 
   return (
     <>
-
       {isLoggedIn && children}
+
       {showSessionExpired && (
-        <div style={modalStyle}>
-          <div style={modalBoxStyle}>
+        <div className="session-expired-modal">
+          <div className="session-expired-box">
             <h3>⚠️ Session Expired</h3>
-            <p>Your session has expired. Please login again to continue.</p>
+            <p>Your session has expired. Please log in again to continue.</p>
             <button onClick={handleHomeRedirect}>Home</button>
             <button onClick={handleLoginRedirect}>Login</button>
           </div>
@@ -89,25 +92,5 @@ function AppWrapper({ children }) {
     </>
   );
 }
-
-
-// Minimal inline modal styling
-const modalStyle = {
-    position: 'fixed',
-    top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  zIndex: 9999,
-};
-
-const modalBoxStyle = {
-  backgroundColor: '#fff',
-  padding: '20px 30px',
-  borderRadius: '8px',
-  textAlign: 'center',
-  color: 'black',
-};
 
 export default AppWrapper;

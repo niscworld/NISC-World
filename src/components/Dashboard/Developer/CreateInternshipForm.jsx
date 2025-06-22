@@ -1,6 +1,7 @@
 // components/Dashboard/Developer/CreateInternshipForm.jsx
 import React, { useState } from 'react';
 import API from './../../../api/MainApi';
+import './CreateInternshipForm.css';
 
 function CreateInternshipForm() {
   const [formData, setFormData] = useState({

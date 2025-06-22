@@ -1,0 +1,154 @@
+.internships-list {
+  padding: 2rem;
+  max-width: 1100px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--black);
+}
+
+.internships-list h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--deep-magenta);
+}
+
+.internships-list ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.internship-card {
+  /* background: var(--medium-gray); */
+  padding: 1.5rem;
+  border-radius: 10px;
+  color: var(--black);
+  box-shadow: 0 4px 12px var(--black);
+  transition: transform 0.3s ease, background 0.3s ease;
+  border: 5px solid var(--pure-white);
+  border-left: 6px solid var(--bright-pink);
+}
+
+.internship-card:hover {
+    transform: translateY(-6px);
+    background: var(--hover-bg-secondary);
+    color: var(--pure-white);
+}
+
+.internship-card h4 {
+  margin-top: 0;
+  color: var(--bright-orange);
+}
+
+.internship-card p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.internship-card button {
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--bright-pink);
+  color: var(--pure-white);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.internship-card button:hover {
+  background-color: var(--vibrant-red);
+}
+
+/* ------------------ Modal Styling ------------------ */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--pure-white);
+  padding: 2.5rem;
+  border-radius: 14px;
+  width: 95%;
+  max-width: 720px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal h4 {
+  margin-top: 0;
+  color: var(--deep-magenta);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.modal input {
+  padding: 0.7rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.modal input:focus {
+  border-color: var(--bright-pink);
+  outline: none;
+}
+
+.modal button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--bright-orange);
+  color: var(--pure-white);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.modal button:hover {
+  background: var(--vibrant-red);
+}
+
+.modal .form-message {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--highlight-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* ------------------ Error ------------------ */
+.error {
+  color: red;
+  text-align: center;
+}
