@@ -11,11 +11,16 @@ import InternMainPanel from './../components/Dashboard/Intern/InternMainPanel.js
 import HRSidebar from '../components/Dashboard/HR/HRSidebar.jsx';
 import HRMainPanel from '../components/Dashboard/HR/HRMainPanel.jsx';
 
+import ViewProfile from './../components/sections/ViewProfile/ViewProfile.jsx';
+import EditProfile from './../components/sections/EditProfile/EditProfile.jsx';
+import ChangePassword from './../components/sections/ChangePassword/ChangePassword.jsx';
+
 import './Dashboard.css';
 
 function Dashboard() {
   const [role, setRole] = useState('');
   const [selectedTab, setSelectedTab] = useState('');
+  const [commonTabSelected, setCommonTabSelected] = useState('');
 
   useEffect(() => {
     const position = localStorage.getItem('position');
@@ -33,8 +38,30 @@ function Dashboard() {
         </div>
       </div>
       <ul className="common-links">
-        <li onClick={() => setSelectedTab('profile')}>👁️ View Profile</li>
-        <li onClick={() => setSelectedTab('edit-profile')}>✏️ Edit Profile</li>
+        <li
+          onClick={() => {
+            setCommonTabSelected('view-profile');
+            setSelectedTab('');
+          }}
+        >
+          👁️ View Profile
+        </li>
+        <li
+          onClick={() => {
+            setCommonTabSelected('edit-profile');
+            setSelectedTab('');
+          }}
+        >
+          ✏️ Edit Profile
+        </li>
+        <li
+          onClick={() => {
+            setCommonTabSelected('change-password');
+            setSelectedTab('');
+          }}
+        >
+          🔒 Change Password
+        </li>
         <li
           className="logout"
           onClick={() => {
@@ -52,16 +79,28 @@ function Dashboard() {
     let roleSidebar;
     switch (role) {
       case 'Developer':
-        roleSidebar = <DeveloperSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <DeveloperSidebar onSelect={(tab) => {
+          setSelectedTab(tab);
+          setCommonTabSelected('');
+        }} />;
         break;
       case 'Owner':
-        roleSidebar = <OwnerSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <OwnerSidebar onSelect={(tab) => {
+          setSelectedTab(tab);
+          setCommonTabSelected('');
+        }} />;
         break;
       case 'Intern':
-        roleSidebar = <InternSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <InternSidebar onSelect={(tab) => {
+          setSelectedTab(tab);
+          setCommonTabSelected('');
+        }} />;
         break;
       case 'HR':
-        roleSidebar = <HRSidebar onSelect={setSelectedTab} />;
+        roleSidebar = <HRSidebar onSelect={(tab) => {
+          setSelectedTab(tab);
+          setCommonTabSelected('');
+        }} />;
         break;
       default:
         roleSidebar = <div className="sidebar">No Access</div>;
@@ -76,6 +115,18 @@ function Dashboard() {
   };
 
   const renderContent = () => {
+    if (commonTabSelected === 'view-profile') {
+      return <ViewProfile />;
+    }
+
+  if (commonTabSelected === 'edit-profile') {
+    return <EditProfile />;
+  }
+
+  if (commonTabSelected === 'change-password') {
+    return <ChangePassword />;
+  }
+
     switch (role) {
       case 'Developer':
         return <DeveloperMainPanel selectedTab={selectedTab} />;

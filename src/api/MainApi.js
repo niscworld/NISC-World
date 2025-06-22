@@ -15,6 +15,10 @@ class API {
   static LOGOUT_ENDPOINT = `${API.ACCOUNTS_API}/logout`;
   static REFRESH_TOKEN_ENDPOINT = `${API.ACCOUNTS_API}/refresh-token`;
 
+  static VIEW_PROFILE = `${API.ACCOUNTS_API}/view-profile`;
+  static EDIT_PROFILE = `${API.ACCOUNTS_API}/edit-profile`;
+  static CHANGE_PASSWORD = `${API.ACCOUNTS_API}/change-password`;
+
   static SEND_OTP = `${API.ACCOUNTS_API}/send-otp`;
   static VERIFY_OTP = `${API.ACCOUNTS_API}/verify-otp`;
 
