@@ -35,14 +35,12 @@ const Navbar = () => {
   };
 
   const navItems = [
+    isLoggedIn ? { path: '/dashboard', label: 'Dashboard', } : '',
     { path: '/', label: 'Home' },
     { path: '/contact', label: 'Contact' },
     { path: '/internships', label: 'Internships' },
     isLoggedIn
-    ? (
-      { path: '/dashboard', label: 'Dashboard', },
-      { path: '#logout', label: 'Logout', onClick: handleLogout }
-    )
+    ? { path: '#logout', label: 'Logout', onClick: handleLogout }
     : { path: '/login', label: 'Login' },
   ];
 
