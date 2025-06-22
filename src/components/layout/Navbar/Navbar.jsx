@@ -39,7 +39,10 @@ const Navbar = () => {
     { path: '/contact', label: 'Contact' },
     { path: '/internships', label: 'Internships' },
     isLoggedIn
-    ? { path: '#logout', label: 'Logout', onClick: handleLogout }
+    ? (
+      { path: '/dashboard', label: 'Dashboard', },
+      { path: '#logout', label: 'Logout', onClick: handleLogout }
+    )
     : { path: '/login', label: 'Login' },
   ];
 
