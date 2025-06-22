@@ -48,6 +48,7 @@ function CreateUserForm() {
       if (res.ok) {
         setMessage(`✅ User created successfully! Generated ID: ${result.user_id} Password: ${result.password}`);
         setMessageType('success');
+        const textToCopy = `Position: ${submissionData.position}\nUsername: ${result.user_id}\nPassword: ${result.password}`;
         setFormData({
           password: '',
           fullname: '',
@@ -55,7 +56,6 @@ function CreateUserForm() {
           position: ''
         });
         // Copy to clipboard
-        const textToCopy = `Username: ${result.user_id}\nPassword: ${result.password}`;
         navigator.clipboard.writeText(textToCopy)
           .then(() => console.log('📋 Credentials copied to clipboard!'))
           .catch(err => console.error('❌ Clipboard copy failed:', err));
