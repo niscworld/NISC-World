@@ -37,7 +37,9 @@ const Team = () => {
     },
   ];
 
-  return (
+  return (<></>); 
+  
+  return(
     <section className={`team-section ${isDarkMode ? 'dark' : 'light'}`} id="team">
       <div className="content-container">
         <div className="section-header">
