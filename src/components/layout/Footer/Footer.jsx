@@ -83,6 +83,7 @@ const Footer = () => {
         <p>© {new Date().getFullYear()} NISC World. All rights reserved.</p>
         <div className="legal-links">
           <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/refund-policy">Refund Policy</a>
           <a href="/terms-of-service">Terms of Service</a>
         </div>
       </div>

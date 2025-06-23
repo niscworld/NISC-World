@@ -13,10 +13,19 @@ import Internships from './pages/Internships.jsx';
 // import Blog from './pages/Blog';
 import Login from './pages/Login.jsx';
 import NotFound from './pages/NotFound'; // ✅ Import 404 page
+
+import RefundPolicy from './pages/RefundPolicy.jsx';
+import TermsOfService from './pages/TermsOfService.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+
+import usePreventRefresh from './hooks/usePreventRefresh.jsx';
+
 import './App.css';
+
 
 function App() {
   const { isDarkMode } = useTheme();
+  usePreventRefresh(); // 🚫 Hook to block refresh
 
   return (
     <div className={`App ${isDarkMode ? 'dark' : 'light'}`}>
@@ -24,14 +33,14 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} /> */}
-          {/* <Route path="/projects" element={<Projects />} /> */}
-          {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} /> {/* ✅ New route */}
-          <Route path="/dashboard" element={<Dashboard />} /> {/* ✅ New route */}
-          <Route path="/internships" element={<Internships />} /> {/* ✅ New route */}
-          <Route path="*" element={<NotFound />} /> {/* ✅ Catch-all route */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/internships" element={<Internships />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
@@ -40,3 +49,7 @@ function App() {
 }
 
 export default App;
+
+
+
+
