@@ -21,11 +21,16 @@ function Dashboard() {
   const [role, setRole] = useState('');
   const [selectedTab, setSelectedTab] = useState('');
   const [commonTabSelected, setCommonTabSelected] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const position = localStorage.getItem('position');
     setRole(position || '');
   }, []);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const commonSidebar = () => (
     <div className="common-sidebar">
@@ -38,37 +43,31 @@ function Dashboard() {
         </div>
       </div>
       <ul className="common-links">
-        <li
-          onClick={() => {
-            setCommonTabSelected('view-profile');
-            setSelectedTab('');
-          }}
-        >
+        <li onClick={() => {
+          setCommonTabSelected('view-profile');
+          setSelectedTab('');
+          setSidebarOpen(false);
+        }}>
           👁️ View Profile
         </li>
-        <li
-          onClick={() => {
-            setCommonTabSelected('edit-profile');
-            setSelectedTab('');
-          }}
-        >
+        <li onClick={() => {
+          setCommonTabSelected('edit-profile');
+          setSelectedTab('');
+          setSidebarOpen(false);
+        }}>
           ✏️ Edit Profile
         </li>
-        <li
-          onClick={() => {
-            setCommonTabSelected('change-password');
-            setSelectedTab('');
-          }}
-        >
+        <li onClick={() => {
+          setCommonTabSelected('change-password');
+          setSelectedTab('');
+          setSidebarOpen(false);
+        }}>
           🔒 Change Password
         </li>
-        <li
-          className="logout"
-          onClick={() => {
-            localStorage.clear();
-            window.location.href = '/login';
-          }}
-        >
+        <li className="logout" onClick={() => {
+          localStorage.clear();
+          window.location.href = '/login';
+        }}>
           🚪 Logout
         </li>
       </ul>
@@ -82,24 +81,28 @@ function Dashboard() {
         roleSidebar = <DeveloperSidebar onSelect={(tab) => {
           setSelectedTab(tab);
           setCommonTabSelected('');
+          setSidebarOpen(false);
         }} />;
         break;
       case 'Owner':
         roleSidebar = <OwnerSidebar onSelect={(tab) => {
           setSelectedTab(tab);
           setCommonTabSelected('');
+          setSidebarOpen(false);
         }} />;
         break;
       case 'Intern':
         roleSidebar = <InternSidebar onSelect={(tab) => {
           setSelectedTab(tab);
           setCommonTabSelected('');
+          setSidebarOpen(false);
         }} />;
         break;
       case 'HR':
         roleSidebar = <HRSidebar onSelect={(tab) => {
           setSelectedTab(tab);
           setCommonTabSelected('');
+          setSidebarOpen(false);
         }} />;
         break;
       default:
@@ -107,25 +110,19 @@ function Dashboard() {
     }
 
     return (
-      <div className="combined-sidebar">
-        {commonSidebar()}
-        <div className="role-sidebar">{roleSidebar}</div>
+      <div className={`sidebar-panel ${sidebarOpen ? 'open' : ''}`}>
+        <div className="combined-sidebar">
+          {commonSidebar()}
+          <div className="role-sidebar">{roleSidebar}</div>
+        </div>
       </div>
     );
   };
 
   const renderContent = () => {
-    if (commonTabSelected === 'view-profile') {
-      return <ViewProfile />;
-    }
-
-  if (commonTabSelected === 'edit-profile') {
-    return <EditProfile />;
-  }
-
-  if (commonTabSelected === 'change-password') {
-    return <ChangePassword />;
-  }
+    if (commonTabSelected === 'view-profile') return <ViewProfile />;
+    if (commonTabSelected === 'edit-profile') return <EditProfile />;
+    if (commonTabSelected === 'change-password') return <ChangePassword />;
 
     switch (role) {
       case 'Developer':
@@ -141,14 +138,23 @@ function Dashboard() {
     }
   };
 
-  return (
-    <AppWrapper>
-      <div className="dashboard-container">
-        <div className="sidebar-panel">{renderSidebar()}</div>
-        <div className="content-panel">{renderContent()}</div>
+return (
+  <AppWrapper>
+    <div className="dashboard-container">
+      {/* Menu Button (inside dashboard) */}
+{!sidebarOpen &&      <div className="dashboard-header">
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          ☰
+        </button>
       </div>
-    </AppWrapper>
-  );
+}
+      {renderSidebar()}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
+
+      <div className="content-panel">{renderContent()}</div>
+    </div>
+  </AppWrapper>
+);
 }
 
 export default Dashboard;
