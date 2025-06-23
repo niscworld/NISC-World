@@ -1,3 +1,4 @@
+// components/Dashboard/HR/HRSidebar.jsx
 import React from 'react';
 import './HRSidebar.css';
 
@@ -7,7 +8,7 @@ function HRSidebar({ onSelect }) {
       <h3 className="sidebar-title">👩‍💼 HR Panel</h3>
       <ul className="sidebar-list">
         <li onClick={() => onSelect('view-applicants')}>📄 View Applicants</li>
-        {/* Add more menu items here in the future */}
+        <li onClick={() => onSelect('view-interns')}>👨‍🎓 View Interns</li>
       </ul>
     </div>
   );

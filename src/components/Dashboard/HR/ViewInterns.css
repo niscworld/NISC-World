@@ -1,0 +1,154 @@
+/* ViewInterns.css */
+
+/* Container Styling */
+.view-interns-container {
+  padding: 2rem;
+  color: var(--black);
+  min-height: 100vh;
+}
+
+/* Intern list */
+.intern-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+/* Intern Card */
+.intern-card {
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  padding: 1rem;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+
+.intern-card:hover {
+  transform: translateY(-5px);
+  background-color: var(--bright-pink);
+}
+
+.intern-card h4 {
+  margin-bottom: 0.6rem;
+  color: var(--pure-white);
+}
+
+.intern-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.intern-card button {
+  margin-top: 0.8rem;
+  background-color: var(--bright-orange);
+  color: var(--pure-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.intern-card button:hover {
+  background-color: var(--vibrant-red);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 17, 17, 0.7); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--deep-magenta);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  color: var(--pure-white);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modal-content h4 {
+  color: var(--pure-white);
+  margin-bottom: 1rem;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  font-size: 1rem;
+  background-color: var(--pure-white);
+  color: var(--black);
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  outline: none;
+  border-color: var(--bright-pink);
+  box-shadow: 0 0 5px var(--bright-pink);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modal-content button {
+  background-color: var(--black);
+  color: var(--pure-white);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: var(--vibrant-red);
+}
+
+.modal-content .cancel-btn {
+  background-color: var(--light-gray);
+  color: var(--pure-white);
+}
+
+.modal-content .cancel-btn:hover {
+  background-color: var(--extra-light-gray);
+}
+
+/* Status message */
+.status {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.status.success {
+  color: var(--bright-orange);
+}
+
+.status.error {
+  color: var(--vibrant-red);
+}

@@ -28,6 +28,7 @@ class API {
   static APPLY_INTERNSHIP = `${API.INTERNSHIPS_API}/apply-internship`
   static ACCEPT_INTERNSHIP = `${API.INTERNSHIPS_API}/accept-internship`
   static REJECT_INTERNSHIP = `${API.INTERNSHIPS_API}/reject-internship`
+  static SEND_MESSAGE_TO_INTERN = `${API.INTERNSHIPS_API}/send-message-to-intern`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;

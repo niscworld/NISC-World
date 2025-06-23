@@ -1,5 +1,7 @@
 import React from 'react';
 import ViewApplicantsTable from './ViewApplicantsTable.jsx';
+import ViewInterns from './ViewInterns.jsx';
+
 import "./HRMainPanel.css";
 
 function HRMainPanel({ selectedTab }) {
@@ -7,6 +9,8 @@ function HRMainPanel({ selectedTab }) {
     switch (selectedTab) {
       case 'view-applicants':
         return <ViewApplicantsTable />;
+      case 'view-interns':
+        return <ViewInterns />
       // You can add more HR-specific tabs here in the future
       default:
         return <div className="hr-panel-message">Select a valid tab</div>;
