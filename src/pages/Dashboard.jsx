@@ -139,6 +139,7 @@ function Dashboard() {
   };
 
 return (
+  <>
   <AppWrapper>
     <div className="dashboard-container">
       {/* Menu Button (inside dashboard) */}
@@ -154,6 +155,7 @@ return (
       <div className="content-panel">{renderContent()}</div>
     </div>
   </AppWrapper>
+  </>
 );
 }
 
