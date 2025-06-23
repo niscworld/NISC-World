@@ -64,12 +64,12 @@ function Dashboard() {
         }}>
           🔒 Change Password
         </li>
-        <li className="logout" onClick={() => {
+        {/* <li className="logout" onClick={() => {
           localStorage.clear();
           window.location.href = '/login';
         }}>
           🚪 Logout
-        </li>
+        </li> */}
       </ul>
     </div>
   );

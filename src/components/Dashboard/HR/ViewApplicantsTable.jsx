@@ -86,7 +86,7 @@ function ViewApplicantsTable() {
     return <p>No applicants found.</p>;
 
   return (
-    <div className="view-applicants">
+    <div className="view-applicants" style={{ overflowX: 'auto' }}>
       {Object.entries(groupedApplicants).map(([code, group]) => (
         <div className="internship-section" key={code}>
           <h4 className="internship-title">

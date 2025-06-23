@@ -1,22 +1,67 @@
 .hr-main-panel {
   padding: 1.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .hr-heading {
   color: var(--deep-magenta);
   font-size: 1.6rem;
   margin-bottom: 1rem;
+  word-break: break-word;
 }
 
 .hr-panel-message {
   padding: 1rem;
   color: var(--medium-gray);
+  font-size: 1rem;
+  text-align: center;
 }
 
 .hr-panel-content {
-  /* background-color: var(--extra-light-gray); */
   padding: 1.2rem;
   border-radius: 10px;
-  box-shadow: 0 1px 5px var(--extra-light-gray);;
+  box-shadow: 0 1px 5px var(--extra-light-gray);
   transition: all 0.3s ease;
+  background-color: var(--pure-white); /* Optional for contrast */
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .hr-main-panel {
+    padding: 1rem;
+  }
+
+  .hr-heading {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .hr-panel-message {
+    font-size: 0.95rem;
+  }
+
+  .hr-panel-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hr-main-panel {
+    padding: 0.8rem;
+  }
+
+  .hr-heading {
+    font-size: 1.2rem;
+  }
+
+  .hr-panel-message {
+    font-size: 0.9rem;
+  }
+
+  .hr-panel-content {
+    padding: 0.8rem;
+  }
 }

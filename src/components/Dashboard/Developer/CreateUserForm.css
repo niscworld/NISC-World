@@ -3,7 +3,8 @@
   padding: 2rem;
   border-radius: 12px;
   max-width: 500px;
-  margin: auto;
+  width: 90%;
+  margin: 2rem auto;
   box-shadow: 0 4px 12px var(--black);
   animation: fadeInUp 0.4s ease;
   transition: all 0.3s ease-in-out;
@@ -13,6 +14,7 @@
   text-align: center;
   color: var(--deep-magenta);
   margin-bottom: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .create-user-form form {
@@ -29,7 +31,8 @@
   border-radius: 8px;
   transition: border-color 0.3s, box-shadow 0.3s;
   background-color: var(--light-gray);
-  /* color: var(--black); */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .create-user-form input:focus,
@@ -59,7 +62,7 @@
   cursor: not-allowed;
 }
 
-.message {
+.create-user-form .message {
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 500;
@@ -67,17 +70,17 @@
   border-radius: 6px;
 }
 
-.message.success {
+.create-user-form .message.success {
   background-color: #d4edda;
   color: #155724;
 }
 
-.message.error {
+.create-user-form .message.error {
   background-color: #f8d7da;
   color: #721c24;
 }
 
-.message.info {
+.create-user-form .message.info {
   background-color: #fff3cd;
   color: #856404;
 }
@@ -87,9 +90,33 @@
     transform: translateY(20px);
     opacity: 0;
   }
-
   to {
     transform: translateY(0px);
     opacity: 1;
+  }
+}
+
+/* 🔻 Mobile-Specific Adjustments */
+@media (max-width: 480px) {
+  .create-user-form {
+    padding: 1.2rem;
+    margin: 1rem auto;
+    border-radius: 8px;
+  }
+
+  .create-user-form h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .create-user-form button {
+    font-size: 0.95rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .create-user-form input,
+  .create-user-form select {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
   }
 }
