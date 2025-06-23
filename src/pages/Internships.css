@@ -21,7 +21,6 @@
 }
 
 .internship-card {
-  /* background: var(--medium-gray); */
   padding: 1.5rem;
   border-radius: 10px;
   color: var(--black);
@@ -29,12 +28,13 @@
   transition: transform 0.3s ease, background 0.3s ease;
   border: 5px solid var(--pure-white);
   border-left: 6px solid var(--bright-pink);
+  /* background-color: var(--light-gray); */
 }
 
 .internship-card:hover {
-    transform: translateY(-6px);
-    background: var(--hover-bg-secondary);
-    color: var(--pure-white);
+  transform: translateY(-6px);
+  background: var(--hover-bg-secondary);
+  color: var(--pure-white);
 }
 
 .internship-card h4 {
@@ -76,17 +76,35 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .modal {
   background: var(--pure-white);
   padding: 2.5rem;
   border-radius: 14px;
-  width: 95%;
-  max-width: 720px;
+  width: 100%;
+  max-width: 1200px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   animation: fadeInUp 0.4s ease;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-y: auto;
+  max-height: 95vh;
 }
+
+.modal .left-panel {
+  width: 65%;
+  padding-right: 1rem;
+  overflow-y: auto;
+}
+
+.modal .right-panel {
+  width: 35%;
+  margin-top: 20px;
+}
+
 
 @keyframes fadeInUp {
   from {
@@ -103,12 +121,14 @@
   color: var(--deep-magenta);
   margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 1.6rem;
 }
 
 .modal form {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1rem;
+  flex-flow: wrap;
 }
 
 .modal input {
@@ -117,6 +137,7 @@
   border-radius: 6px;
   font-size: 1rem;
   transition: border 0.3s ease;
+  width: 100%;
 }
 
 .modal input:focus {
@@ -151,4 +172,59 @@
 .error {
   color: red;
   text-align: center;
+}
+
+/* ------------------ Responsive Design ------------------ */
+
+@media (max-width: 768px) {
+  .modal {
+    flex-direction: column;
+    padding: 1.5rem;
+    width: 95%;
+    height: auto;
+  }
+
+  .modal .left-panel,
+  .modal .right-panel {
+    width: 100%;
+    padding: 0;
+  }
+
+  .modal h4 {
+    font-size: 1.3rem;
+  }
+
+  .internship-card p {
+    font-size: 0.85rem;
+  }
+
+  .internship-card button {
+    font-size: 0.9rem;
+  }
+
+  .modal button {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .internships-list {
+    padding: 1rem;
+  }
+
+  .internship-card {
+    padding: 1rem;
+  }
+
+  .modal {
+    padding: 1rem;
+  }
+
+  .modal input {
+    font-size: 0.95rem;
+  }
+
+  .modal h4 {
+    font-size: 1.1rem;
+  }
 }

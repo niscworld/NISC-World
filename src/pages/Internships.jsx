@@ -9,6 +9,7 @@ function Internships() {
   const [showModal, setShowModal] = useState(false);
   const [selectedCode, setSelectedCode] = useState(null);
   const [selectedInternshipName, setSelectedInternshipName] = useState(null);
+  const [selectedInternshipDescription, setSelectedInternshipDescription] = useState(null);
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -37,9 +38,10 @@ function Internships() {
     fetchInternships();
   }, []);
 
-  const openApplyModal = (code, internship_name) => {
+  const openApplyModal = (code, internship_name, description) => {
     setSelectedCode(code);
     setSelectedInternshipName(internship_name);
+    setSelectedInternshipDescription(description);
     setShowModal(true);
     setFormMessage('');
     setOtpSent(false);
@@ -51,6 +53,7 @@ function Internships() {
     setShowModal(false);
     setSelectedCode(null);
     setSelectedInternshipName(null);
+    setSelectedInternshipDescription(null);
   };
 
   const handleChange = (e) => {
@@ -64,6 +67,7 @@ function Internships() {
     }
 
     try {
+      setFormMessage('Please wait while we send OTP.');
       const res = await fetch(API.SEND_OTP, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -162,12 +166,12 @@ function Internships() {
         {internships.map((internship) => (
           <li key={internship.id} className="internship-card">
             <h4>{internship.title}</h4>
-            {internship.description && <p>{internship.description}</p>}
+            {internship.description && <p>{internship.description.slice(0,100)}...</p>}
             <p><strong>Department:</strong> {internship.department || 'N/A'}</p>
             <p><strong>Duration:</strong> {internship.duration || 'N/A'}</p>
             <p><strong>Location:</strong> {internship.location || 'N/A'}</p>
             <p><strong>Stipend:</strong> {internship.stipend || 'N/A'}</p>
-            <button onClick={() => openApplyModal(internship.code, internship.title)}>Apply Now</button>
+            <button onClick={() => openApplyModal(internship.code, internship.title, internship.description)}>Apply Now</button>
           </li>
         ))}
       </ul>
@@ -175,29 +179,46 @@ function Internships() {
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal">
-            <h4>Apply for Internship</h4>
+            <div className="left-panel">
+            <h4>Apply for - {selectedInternshipName}
+            </h4>
+<div>
+  {selectedInternshipDescription?.split('\n').map((line, index) => (
+    <>
+    <p key={index}>{line}</p>
+    <p style={{ margin: "2px", width: "10%", height:"1px" }}></p>
+    </>
+  ))}
+</div>            </div>
+            <div className="right-panel">
             <form onSubmit={handleSubmit}>
               <input name="fullname" placeholder="Full Name" required value={formData.fullname} onChange={handleChange} />
               <input name="email" placeholder="Email" type="email" value={formData.email} onChange={handleChange} required />
-              <button type="button" onClick={sendOtp} disabled={otpSent}>Send OTP</button>
+              {(
+                <>
+                  <input name="resume_url" placeholder="Resume URL (Google Drive, etc)" value={formData.resume_url} onChange={handleChange} required />
+                </>
+              )}
 
-              {otpSent && (
+
+              {!otpSent && (
+                <>
+                <button type="button" onClick={sendOtp} disabled={otpSent}>Send OTP</button>
+                </>
+              )}
+
+              {otpSent && !otpVerified && (
                 <>
                   <input name="otp" placeholder="Enter OTP" value={formData.otp} onChange={handleChange} />
                   <button type="button" onClick={verifyOtp} disabled={otpVerified}>Verify OTP</button>
                 </>
               )}
 
-              {otpVerified && (
-                <>
-                  <input name="resume_url" placeholder="Resume URL (Google Drive, etc)" value={formData.resume_url} onChange={handleChange} required />
-                  <button type="submit">Submit Application</button>
-                </>
-              )}
-
+              <button type="submit">Submit Application</button>
               <button type="button" onClick={closeModal}>Cancel</button>
             </form>
             {formMessage && <p className="form-message">{formMessage}</p>}
+            </div>
           </div>
         </div>
       )}
