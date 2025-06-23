@@ -140,7 +140,7 @@ function Dashboard() {
 
 return (
   <>
-  {/* <AppWrapper> */}
+  <AppWrapper>
     <div className="dashboard-container">
       {/* Menu Button (inside dashboard) */}
 {!sidebarOpen &&      <div className="dashboard-header">
@@ -154,7 +154,7 @@ return (
 
       <div className="content-panel">{renderContent()}</div>
     </div>
-  {/* </AppWrapper> */}
+  </AppWrapper>
   </>
 );
 }
