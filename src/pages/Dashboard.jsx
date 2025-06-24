@@ -37,9 +37,9 @@ function Dashboard() {
       <div className="profile-section">
         <div className="profile-pic">👤</div>
         <div className="profile-details">
-          <span>{localStorage.getItem('user_id') || 'User'}</span>
+          <span>{localStorage.getItem('fullname')}</span>
           <br />
-          <small>{role}</small>
+          <small>{localStorage.getItem('user_id') || 'User'} • {role}</small>
         </div>
       </div>
       <ul className="common-links">

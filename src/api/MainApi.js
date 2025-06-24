@@ -5,6 +5,8 @@ class API {
 
   static BASE_URL = API.DEVELOPMENT_MODE ? 'http://127.0.0.1:5000' : 'https://nisc-world-backend.onrender.com';
 
+  static IS_SERVER_ON = `${API.BASE_URL}/is_server_on`
+
   static ACCOUNTS_URL = `${API.BASE_URL}/accounts`;
 
   static API_URL = `${API.BASE_URL}/api/v1`;

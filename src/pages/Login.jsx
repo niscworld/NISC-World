@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import API from './../api/MainApi.js';
-import { refreshToken } from '../utils/refreshToken'; // ✅ Import the refresh utility
+import { refreshToken } from '../utils/refreshToken';
 
 function Login() {
   const navigate = useNavigate();
@@ -12,9 +12,21 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
+  const [initialLoading, setInitialLoading] = useState(true); // ⏳ Initial 2-second loading
 
-  // ✅ Try auto-login if tokens are in localStorage
+  // 🔁 Simulate loading screen
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // ✅ Try auto-login if tokens exist
+  useEffect(() => {
+    if (initialLoading) return;
+
     const user_id = localStorage.getItem('user_id');
     const token = localStorage.getItem('token');
     const refresh_token = localStorage.getItem('refresh_token');
@@ -46,7 +58,7 @@ function Login() {
           });
       }
     }
-  }, []);
+  }, [initialLoading]);
 
   // ✅ Manual login
   const handleLogin = async (e) => {
@@ -63,15 +75,14 @@ function Login() {
         },
         body: JSON.stringify({ id, password }),
       });
-      
+
       const data = await response.json();
 
-      
       if (response.ok) {
         setMessage('Login successful! Redirecting...');
         setMessageType('success');
 
-        // ✅ Save everything
+        // ✅ Save tokens and user info
         localStorage.setItem('token', data.token);
         localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('user_id', data.user);
@@ -93,6 +104,15 @@ function Login() {
       setLoading(false);
     }
   };
+
+  // ⏳ Initial loading screen
+  if (initialLoading) {
+    return (
+      <div className="login-container">
+        <div className="loader">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="login-container">

@@ -170,3 +170,17 @@
 [data-theme="dark"] .mobile-nav-links {
   border-top: 1px solid var(--dark-gray);
 }
+
+.server-status {
+  display: inline-block;
+  animation: blink 5s infinite;
+}
+
+@keyframes blink {
+  0%, 30%, 50%, 70%, 90%, 100% {
+    opacity: 1;
+  }
+  40%, 80% {
+    opacity: 0;
+  }
+}
