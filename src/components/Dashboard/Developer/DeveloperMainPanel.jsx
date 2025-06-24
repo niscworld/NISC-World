@@ -3,13 +3,22 @@ import API from '../../../api/MainApi';
 import CreateUserForm from './CreateUserForm';
 import CreateInternshipForm from './CreateInternshipForm';
 
+
+
 function DeveloperMainPanel({ selectedTab }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const user_id = localStorage.getItem('user_id');
 
-  useEffect(() => {
+  const user_id = localStorage.getItem('user_id');
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('position');
+
+
+
+  async function checkAccess(){
     if (!selectedTab) return;
+    console.log(data)
+    setData(null);
 
     setLoading(true);
     fetch(`${API.DASHBOARD_DEVELOPER_ENDPOINT}/${selectedTab}`, {
@@ -17,7 +26,7 @@ function DeveloperMainPanel({ selectedTab }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user_id }),
+      body: JSON.stringify({ user_id, token, role }),
     })
       .then((res) => res.json())
       .then((result) => setData(result))
@@ -26,11 +35,19 @@ function DeveloperMainPanel({ selectedTab }) {
         setData({ error: 'Failed to load data.' });
       })
       .finally(() => setLoading(false));
+}
+
+
+  useEffect(() => {
+    checkAccess();
   }, [selectedTab]);
 
   const showContent = () => {
     if (loading) return <p>Loading...</p>;
     if (data?.error) return <p className="error">{data.error}</p>;
+
+    // console.log(data)
+    // checkAccess();
 
     switch (selectedTab) {
       case 'view-users':
@@ -46,7 +63,7 @@ function DeveloperMainPanel({ selectedTab }) {
                 </tr>
               </thead>
               <tbody>
-                {data.map((user, idx) => (
+                {data!=null && data.map && data.map((user, idx) => (
                   <tr key={idx}>
                     <td>{user.user_id}</td>
                     <td>{user.fullname}</td>

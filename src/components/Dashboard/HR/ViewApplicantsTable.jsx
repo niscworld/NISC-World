@@ -7,32 +7,40 @@ function ViewApplicantsTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [actionStatus, setActionStatus] = useState({});
-  const [messages, setMessages] = useState({}); // For storing custom messages
+  const [messages, setMessages] = useState({});
 
   const user_id = localStorage.getItem('user_id');
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('position');
 
   useEffect(() => {
+    if (!user_id || !token || !role) {
+      setError('Missing credentials. Please log in again.');
+      setLoading(false);
+      return;
+    }
+
     const fetchApplicants = async () => {
       try {
         const res = await fetch(`${API.DASHBOARD_HR_ENDPOINT}/view-applicants`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id }),
+          body: JSON.stringify({ user_id, token, role }),
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.message || 'Failed to fetch applicants');
+        if (!res.ok) throw new Error(data.message || data.error || '❌Failed to fetch applicants');
         setGroupedApplicants(data);
       } catch (err) {
         console.error(err);
-        setError('❌ Failed to load applicants.');
+        setError(`${err}`);
       } finally {
         setLoading(false);
       }
     };
 
     fetchApplicants();
-  }, [user_id]);
+  }, [user_id, token, role]);
 
   const handleMessageChange = (key, value) => {
     setMessages((prev) => ({
@@ -53,11 +61,14 @@ function ViewApplicantsTable() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          user_id,
+          token,
+          role,
           fullname: applicant.fullname,
           email: applicant.email,
           resume_url: applicant.resume_url,
           internship_code: applicant.internship_code,
-          message, // Include custom message
+          message,
         }),
       });
 

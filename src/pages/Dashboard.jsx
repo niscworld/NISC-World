@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AppWrapper from '../context/AppWrapper.jsx';
+import API from '../api/MainApi.js';
+import { logout } from '../utils/Logout.jsx';
 
 import DeveloperSidebar from './../components/Dashboard/Developer/DeveloperSidebar.jsx';
 import DeveloperMainPanel from './../components/Dashboard/Developer/DeveloperMainPanel.jsx';
@@ -18,18 +21,49 @@ import ChangePassword from './../components/sections/ChangePassword/ChangePasswo
 import './Dashboard.css';
 
 function Dashboard() {
-  const [role, setRole] = useState('');
+  const navigate = useNavigate();
+
+  const [role, setRole] = useState(null); // null = not checked yet
   const [selectedTab, setSelectedTab] = useState('');
   const [commonTabSelected, setCommonTabSelected] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user_id = localStorage.getItem('user_id');
     const position = localStorage.getItem('position');
-    setRole(position || '');
-  }, []);
+
+    if (!token || !user_id || !position) {
+      navigate('/login');
+      return;
+    }
+
+    fetch(API.WHOAMI, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, user_id, role: position }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setRole(position);
+        } else {
+          logout().then(() => navigate('/login'));
+        }
+      })
+      .catch(err => {
+        console.error('[WHOAMI ERROR]', err);
+        logout().then(() => navigate('/login'));
+      });
+  }, [navigate]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
   };
 
   const commonSidebar = () => (
@@ -64,46 +98,33 @@ function Dashboard() {
         }}>
           🔒 Change Password
         </li>
-        {/* <li className="logout" onClick={() => {
-          localStorage.clear();
-          window.location.href = '/login';
-        }}>
+        <li className="logout" onClick={handleLogout}>
           🚪 Logout
-        </li> */}
+        </li>
       </ul>
     </div>
   );
 
   const renderSidebar = () => {
     let roleSidebar;
+    const handleTabSelect = (tab) => {
+      setSelectedTab(tab);
+      setCommonTabSelected('');
+      setSidebarOpen(false);
+    };
+
     switch (role) {
       case 'Developer':
-        roleSidebar = <DeveloperSidebar onSelect={(tab) => {
-          setSelectedTab(tab);
-          setCommonTabSelected('');
-          setSidebarOpen(false);
-        }} />;
+        roleSidebar = <DeveloperSidebar onSelect={handleTabSelect} />;
         break;
       case 'Owner':
-        roleSidebar = <OwnerSidebar onSelect={(tab) => {
-          setSelectedTab(tab);
-          setCommonTabSelected('');
-          setSidebarOpen(false);
-        }} />;
+        roleSidebar = <OwnerSidebar onSelect={handleTabSelect} />;
         break;
       case 'Intern':
-        roleSidebar = <InternSidebar onSelect={(tab) => {
-          setSelectedTab(tab);
-          setCommonTabSelected('');
-          setSidebarOpen(false);
-        }} />;
+        roleSidebar = <InternSidebar onSelect={handleTabSelect} />;
         break;
       case 'HR':
-        roleSidebar = <HRSidebar onSelect={(tab) => {
-          setSelectedTab(tab);
-          setCommonTabSelected('');
-          setSidebarOpen(false);
-        }} />;
+        roleSidebar = <HRSidebar onSelect={handleTabSelect} />;
         break;
       default:
         roleSidebar = <div className="sidebar">No Access</div>;
@@ -120,6 +141,8 @@ function Dashboard() {
   };
 
   const renderContent = () => {
+    if (!role) return <div className="content-panel">Loading...</div>;
+
     if (commonTabSelected === 'view-profile') return <ViewProfile />;
     if (commonTabSelected === 'edit-profile') return <EditProfile />;
     if (commonTabSelected === 'change-password') return <ChangePassword />;
@@ -138,25 +161,22 @@ function Dashboard() {
     }
   };
 
-return (
-  <>
-  <AppWrapper>
-    <div className="dashboard-container">
-      {/* Menu Button (inside dashboard) */}
-{!sidebarOpen &&      <div className="dashboard-header">
-        <button className="sidebar-toggle" onClick={toggleSidebar}>
-          ☰
-        </button>
+  return (
+    <AppWrapper>
+      <div className="dashboard-container">
+        {!sidebarOpen && (
+          <div className="dashboard-header">
+            <button className="sidebar-toggle" onClick={toggleSidebar}>
+              ☰
+            </button>
+          </div>
+        )}
+        {renderSidebar()}
+        {sidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
+        <div className="content-panel">{renderContent()}</div>
       </div>
-}
-      {renderSidebar()}
-      {sidebarOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
-
-      <div className="content-panel">{renderContent()}</div>
-    </div>
-  </AppWrapper>
-  </>
-);
+    </AppWrapper>
+  );
 }
 
 export default Dashboard;

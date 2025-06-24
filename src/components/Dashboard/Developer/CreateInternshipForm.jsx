@@ -1,4 +1,3 @@
-// components/Dashboard/Developer/CreateInternshipForm.jsx
 import React, { useState } from 'react';
 import API from './../../../api/MainApi';
 import './CreateInternshipForm.css';
@@ -25,6 +24,16 @@ function CreateInternshipForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('position');
+
+    if (!user_id || !token || !role) {
+      setMessage('Missing user credentials. Please log in again.');
+      setMessageType('error');
+      return;
+    }
+
     if (!formData.title.trim()) {
       setMessage('❌ Title is required.');
       setMessageType('error');
@@ -35,13 +44,20 @@ function CreateInternshipForm() {
     setMessage('Creating internship...');
     setMessageType('info');
 
+    const submissionData = {
+      ...formData,
+      user_id,
+      token,
+      role
+    };
+
     try {
       const res = await fetch(`${API.DEVELOPER_CREATE_INTERNSHIP}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(submissionData)
       });
 
       const result = await res.json();

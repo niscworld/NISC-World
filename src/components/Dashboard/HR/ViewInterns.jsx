@@ -4,25 +4,45 @@ import './ViewInterns.css';
 
 function ViewInterns() {
   const [interns, setInterns] = useState([]);
+  const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [messageData, setMessageData] = useState({ subject: '', body: '' });
   const [statusMessage, setStatusMessage] = useState('');
 
-  useEffect(() => {
-    const fetchInterns = async () => {
-      try {
-        const res = await fetch(`${API.INTERNSHIPS_API}/view-interns`);
-        const data = await res.json();
-        setInterns(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+  const user_id = localStorage.getItem('user_id');
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('position');
+
+useEffect(() => {
+  const fetchInterns = async () => {
+    try {
+      const res = await fetch(`${API.INTERNSHIPS_API}/view-interns`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id, token, role }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error('API Error:', data?.error || 'Unknown error');
+        throw new Error(data?.error || 'Failed to fetch interns');
       }
-    };
-    fetchInterns();
-  }, []);
+
+      setInterns(data);
+    } catch (err) {
+      console.error('Fetch error:', err.message);
+      setErrorMsg(err.message)
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchInterns();
+}, [user_id, token, role]);
 
   const handleSendMessage = async () => {
     if (!selectedIntern || !messageData.subject || !messageData.body) {
@@ -61,6 +81,8 @@ function ViewInterns() {
 
       {loading ? (
         <p>Loading interns...</p>
+      ) : errorMsg ? (
+        <p>{errorMsg}</p>
       ) : interns.length === 0 ? (
         <p>No interns currently enrolled.</p>
       ) : (
