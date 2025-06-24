@@ -19,8 +19,8 @@ const Footer = () => {
           <p className="footer-motto">
             "All your tech needs meet here"
           </p>
-          <div className="social-links">
-            <a href="https://linkedin.com/company/nisc-world" target="_blank" rel="noopener noreferrer">
+          <div className="social-links" style={{ display: "none" }}>
+            <a href="https://linkedin.com/in/nisc-world" target="_blank" rel="noopener noreferrer">
               <FaLinkedin className="social-icon" />
             </a>
             <a href="https://twitter.com/nisc-world" target="_blank" rel="noopener noreferrer">
@@ -43,15 +43,15 @@ const Footer = () => {
           <h4 className="footer-heading">Quick Links</h4>
           <ul className="footer-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/blog">Blog</a></li>
+            {/* <li><a href="/about">About Us</a></li> */}
+            <li><a href="#projects">Projects</a></li>
+            {/* <li><a href="/blog">Blog</a></li> */}
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
 
         {/* Services Column */}
-        <div className="footer-column">
+        <div className="footer-column" style={{display: "none"}}>
           <h4 className="footer-heading">Services</h4>
           <ul className="footer-links">
             <li><a href="/services/web-development">Web Development</a></li>
@@ -72,7 +72,7 @@ const Footer = () => {
             </div>
             <div className="contact-item">
               <MdLocationOn className="contact-icon" />
-              <span>Bengaluru, India</span>
+              <span>Tirupathi, India</span>
             </div>
           </div>
         </div>

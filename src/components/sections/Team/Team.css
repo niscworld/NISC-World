@@ -193,3 +193,10 @@
     height: 140px;
   }
 }
+
+.team-subtitle {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  color: var(--primary-color);
+  text-align: center;
+}

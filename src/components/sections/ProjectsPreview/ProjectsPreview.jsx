@@ -2,31 +2,36 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+
 import defaultImage from './assets/default-project.jpg'; 
+import MedTrackProImage from "./assets/MedTrackPro.png";
+import CureConnectImage from "./assets/CureConnect.png";
+import AquaRushImage from "./assets/AquaRush.png";
+
 import './ProjectsPreview.css';
 
 // Project data
 const projects = [
   {
-    title: "My Home Water Supply",
-    description: "A digital platform for water delivery management with real-time tracking and payment integration.",
-    tags: ["React", "Node.js", "MongoDB"],
-    link: "/app/water",
-    image: defaultImage
+    title: "Aqua Rush",
+    description: "A digital platform for water delivery management with real-time tracking and deliver to door step.",
+    tags: ["React", "MongoDB", "Maps", "Python"],
+    link: "#",
+    image: AquaRushImage
   },
   {
-    title: "Clinic Appointment",
+    title: "Cure Connect",
     description: "Online booking system for medical appointments with doctor scheduling and reminders.",
-    tags: ["Vue.js", "Firebase", "Twilio"],
-    link: "/app/clinicAppointment",
-    image: defaultImage
+    tags: ["Flask", "Postgre", "Google Calenders", "React"],
+    link: "#",
+    image: CureConnectImage
   },
   {
-    title: "Pill Report",
+    title: "MedTrackPro",
     description: "Inventory management system for pharmacies with bill generation and stock alerts.",
-    tags: ["Angular", "Python", "SQL"],
-    link: "/app/pillReport",
-    image: defaultImage
+    tags: ["React", "Python", "Postgre"],
+    link: "#",
+    image: MedTrackProImage
   }
 ];
 
@@ -99,11 +104,13 @@ const ProjectsPreview = () => {
                     e.target.src = defaultImage; // Fallback image if the original fails to load
                   }}
                 />
-                <div className="project-links">
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    <FaExternalLinkAlt className="link-icon" />
-                  </a>
-                </div>
+                {project.link !== "#" && (
+                  <div className="project-links">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt className="link-icon" />
+                    </a>
+                  </div>
+                )}
               </div>
               <div className="project-content">
                 <h3>{project.title}</h3>
@@ -124,6 +131,7 @@ const ProjectsPreview = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
+          style={{ display: "none" }}
         >
           <a href="/projects" className="view-more-btn">
             View All Projects →

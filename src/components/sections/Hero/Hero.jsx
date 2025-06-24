@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../../../context/ThemeContext';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 import { FaArrowRight, FaLaptop, FaMobile, FaServer } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import banner from "./assets/banner.jpg";
 
 const Hero = () => {
   const { isDarkMode } = useTheme();
@@ -70,6 +72,7 @@ const Hero = () => {
         <FaServer />
       </motion.div>
 
+
       {/* Content */}
       <div className="hero-content">
         <motion.h1 
@@ -78,6 +81,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+      <div className="banner" style={{ width: "100%" }}>
+        <img src={banner} alt="" style={{ width: "100%" }} />
+      </div>
           <span className="gradient-text">NISC World</span>
           <br />
           <motion.h2 
@@ -110,7 +116,9 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Internships <FaArrowRight className="arrow-icon" />
+
+          <Link key="/internships" to="/internships" > Internships </Link> <FaArrowRight className="arrow-icon" />
+          
           </motion.button>
           <motion.button 
             className="secondary-button"
@@ -121,7 +129,7 @@ const Hero = () => {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            Contact Us
+            <Link key="/contact" to="/contact" > Contact Us </Link>
           </motion.button>
         </motion.div>
       </div>

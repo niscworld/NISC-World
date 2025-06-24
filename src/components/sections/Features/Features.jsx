@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
-import { FaCode, FaServer, FaMobileAlt, FaCloud } from 'react-icons/fa';
+import { FaPencilRuler, FaLaptopCode, FaCodeBranch, FaMobileAlt } from 'react-icons/fa';
 import './Features.css';
 
 const Features = () => {
@@ -9,24 +9,24 @@ const Features = () => {
 
   const features = [
     {
-      icon: <FaCode className="feature-icon" />,
-      title: "Custom Development",
-      description: "Tailored software solutions designed specifically for your business needs."
+      icon: <FaPencilRuler className="feature-icon" />,
+      title: "UI/UX Designing",
+      description: "Creating intuitive, visually appealing interfaces focused on user experience."
     },
     {
-      icon: <FaServer className="feature-icon" />,
-      title: "Backend Services",
-      description: "Robust server architecture for high-performance applications."
+      icon: <FaLaptopCode className="feature-icon" />,
+      title: "Web Development",
+      description: "Building responsive and modern websites tailored to your goals."
+    },
+    {
+      icon: <FaCodeBranch className="feature-icon" />,
+      title: "Full Stack Development",
+      description: "End-to-end solutions combining frontend and backend expertise."
     },
     {
       icon: <FaMobileAlt className="feature-icon" />,
-      title: "Mobile Apps",
-      description: "Cross-platform mobile applications with native performance."
-    },
-    {
-      icon: <FaCloud className="feature-icon" />,
-      title: "Cloud Solutions",
-      description: "Scalable cloud infrastructure for growing businesses."
+      title: "Applications",
+      description: "Crafting efficient cross-platform apps for mobile and desktop use."
     }
   ];
 
@@ -67,7 +67,7 @@ const Features = () => {
         </motion.h2>
         
         <motion.p className="section-subtitle" variants={itemVariants}>
-          Comprehensive solutions for all your tech needs
+          Solutions tailored for design, web, and application development
         </motion.p>
 
         <div className="features-grid">
