@@ -7,11 +7,17 @@ import Team from '../components/sections/Team/Team';
 // import Testimonials from '../components/sections/Testimonials/Testimonials';
 // import BlogPreview from '../components/sections/BlogPreview/BlogPreview';
 // import CTA from '../components/sections/CTA/CTA';
+import AnimatedTechLines from '../hooks/AnimatedTechLines';
 import './Home.css';
 
 const Home = () => {
   return (
     <div className="home-page">
+      {/* Animated Background Elements */}
+      <div className="global-animation-container">
+        <AnimatedTechLines />
+      </div>
+
       {/* Hero Section */}
       <section id="hero">
         <Hero />

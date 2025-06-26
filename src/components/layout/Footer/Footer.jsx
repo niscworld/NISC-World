@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '../../../context/ThemeContext';
 import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook, FaDiscord } from 'react-icons/fa';
-import { MdEmail, MdLocationOn } from 'react-icons/md';
+import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import './Footer.css';
 
 const Footer = () => {
@@ -68,7 +68,11 @@ const Footer = () => {
           <div className="contact-info">
             <div className="contact-item">
               <MdEmail className="contact-icon" />
-              <span>support@nisc.co.in</span>
+              <span>nisc.co.in@gmail.com</span>
+            </div>
+            <div className="contact-item">
+              <MdPhone className="contact-icon" />
+              <span>(+91) 8897 468 745</span>
             </div>
             <div className="contact-item">
               <MdLocationOn className="contact-icon" />
