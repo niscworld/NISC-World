@@ -4,6 +4,8 @@ import Hero from '../components/sections/Hero/Hero';
 import Features from '../components/sections/Features/Features';
 import ProjectsPreview from '../components/sections/ProjectsPreview/ProjectsPreview';
 import Team from '../components/sections/Team/Team';
+import AboutUs from '../components/sections/About/About';
+import Testimonials from '../components/sections/Testimonials/Testimonials';
 // import Testimonials from '../components/sections/Testimonials/Testimonials';
 // import BlogPreview from '../components/sections/BlogPreview/BlogPreview';
 // import CTA from '../components/sections/CTA/CTA';
@@ -37,6 +39,15 @@ const Home = () => {
       <section id="team" className="section-spacing">
         <Team />
       </section>
+
+      <section id="about" className="section-spacing">
+        <AboutUs />
+      </section>
+
+      <section id="Testimonials" className="section-spacing">
+        <Testimonials />
+      </section>
+
 
       {/* Testimonials */}
       {/* <section id="testimonials" className="section-spacing dark-bg">

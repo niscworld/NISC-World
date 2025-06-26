@@ -1,0 +1,99 @@
+/* src/pages/About/AboutUs.css */
+
+.about-section {
+  /* background-color: var(--extra-light-gray); */
+  padding: 80px 20px;
+  color: var(--black);
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--deep-magenta);
+}
+
+.highlight {
+  color: var(--vibrant-red);
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: var(--dark-gray);
+  line-height: 1.8;
+}
+
+.vision-mission {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.card {
+  background-color: var(--pure-white);
+  border: 1px solid var(--light-gray);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+  flex: 1 1 300px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--hover-border);
+  /* background-color: var(--hover-bg); */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--bright-pink);
+}
+
+.founder-messages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.founder-message {
+  flex: 1 1 350px;
+  max-width: 800px;
+  margin: 0 auto;
+  /* background-color: var(--highlight-bg); */
+  padding: 40px;
+  border-left: 6px solid var(--vibrant-red);
+  border-radius: 10px;
+  text-align: left;
+  color: var(--dark-gray);
+}
+
+.founder-message h3 {
+  color: var(--deep-magenta);
+  margin-bottom: 15px;
+}
+
+.founder-message p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.signature {
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  font-weight: bold;
+  color: var(--bright-orange);
+}

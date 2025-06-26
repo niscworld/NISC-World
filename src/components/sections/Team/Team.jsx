@@ -106,7 +106,7 @@ const Team = () => {
         {members.map((member, index) => (
           <motion.div 
             key={index}
-            className={`team-card ${isDarkMode ? 'dark' : 'light'}`}
+            className={`team-card ${title} ${isDarkMode ? 'dark' : 'light'}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}

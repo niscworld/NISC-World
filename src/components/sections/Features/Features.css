@@ -41,8 +41,8 @@
 /* Features Grid */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1rem;
   padding: 0 2rem;
   margin-top: 20px;
 }
@@ -50,7 +50,7 @@
 .feature-card {
   background: var(--pure-white);
   border-radius: 15px;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1rem;
   transition: all 0.4s ease;
   border: 1px solid var(--extra-light-gray);
   position: relative;

@@ -1,8 +1,21 @@
 import React from 'react';
 import { useTheme } from '../../../context/ThemeContext';
-import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook, FaDiscord } from 'react-icons/fa';
+import {
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaWhatsapp,
+  FaYoutube,
+  FaTag,
+} from 'react-icons/fa';
+import { SiThreads } from 'react-icons/si'
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import './Footer.css';
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 
 const Footer = () => {
   const { isDarkMode } = useTheme();
@@ -19,21 +32,29 @@ const Footer = () => {
           <p className="footer-motto">
             "All your tech needs meet here"
           </p>
-          <div className="social-links" style={{ display: "none" }}>
-            <a href="https://linkedin.com/in/nisc-world" target="_blank" rel="noopener noreferrer">
+
+          {/* Updated Social Links */}
+          <div className="social-links">
+            <a href="https://linkedin.com/in/nisc-world" target="_blank" rel="noopener noreferrer" style={{ display: "none"}}>
               <FaLinkedin className="social-icon" />
             </a>
-            <a href="https://twitter.com/nisc-world" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/NiscWorld" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="social-icon" />
             </a>
-            <a href="https://instagram.com/nisc-world" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.threads.com/@niscworld" target="_blank" rel="noopener noreferrer">
+              <SiThreads className="social-icon" />
+            </a>
+            <a href="https://www.instagram.com/niscworld?igsh=MXhmZHdnZndzYmNpeA==" target="_blank" rel="noopener noreferrer">
               <FaInstagram className="social-icon" />
             </a>
-            <a href="https://facebook.com/nisc-world" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/niscworld?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer">
               <FaFacebook className="social-icon" />
             </a>
-            <a href="https://discord.gg/nisc-world" target="_blank" rel="noopener noreferrer">
-              <FaDiscord className="social-icon" />
+            <a href="https://youtube.com/@niscworld?si=zcyRoe1qrihvZ79e" target="_blank" rel="noopener noreferrer">
+              <FaYoutube className="social-icon" />
+            </a>
+            <a href="https://whatsapp.com/channel/0029VakcEtB5Ejy6sgVAKc0K" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="social-icon" title="WhatsApp Channel (used Discord icon as placeholder)" />
             </a>
           </div>
         </div>
@@ -51,7 +72,7 @@ const Footer = () => {
         </div>
 
         {/* Services Column */}
-        <div className="footer-column" style={{display: "none"}}>
+        <div className="footer-column" style={{ display: "none" }}>
           <h4 className="footer-heading">Services</h4>
           <ul className="footer-links">
             <li><a href="/services/web-development">Web Development</a></li>
