@@ -3,30 +3,31 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Poppins', sans-serif; /* Matching your hero section font */
+  font-family: 'Poppins', sans-serif;
   background-color: var(--pure-white);
   color: var(--dark-gray);
-  overflow-x: hidden; /* Prevents horizontal overflow */
+  overflow-x: hidden;
   width: 100%;
+  position: relative;
 }
 
 main {
   flex: 1;
   width: 100%;
-  padding: 2rem 0; /* Vertical padding only */
+  padding: 2rem 0;
   margin-top: 100px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Container for content that needs max-width */
 .content-container {
   width: 100%;
-  max-width: 1400px; /* Slightly larger than 1200px for modern screens */
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem; /* Horizontal padding only */
+  padding: 0 2rem;
   box-sizing: border-box;
 }
 
-/* Full-width sections can use this */
 .full-width {
   width: 100vw;
   position: relative;
@@ -34,7 +35,115 @@ main {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  padding: 2rem 0; /* Vertical padding */
+  padding: 2rem 0;
+}
+
+/* Background Animation Layer - Added */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  transition: opacity 0.5s ease;
+}
+
+/* Animated Lines - Added */
+.animated-line {
+  position: absolute;
+  background: linear-gradient(90deg, 
+    var(--bright-pink), 
+    var(--bright-orange), 
+    var(--vibrant-red));
+  height: 1px;
+  width: 200%;
+  transform-origin: left center;
+  animation: moveLine 20s linear infinite;
+  opacity: 0.7;
+}
+
+.animated-line:nth-child(odd) {
+  animation-duration: 25s;
+  animation-direction: reverse;
+  background: linear-gradient(90deg, 
+    var(--vibrant-red), 
+    var(--bright-orange), 
+    var(--deep-magenta));
+}
+
+.animated-line:nth-child(3n) {
+  animation-duration: 30s;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--deep-magenta), 
+    var(--bright-pink), 
+    var(--bright-orange));
+}
+
+/* Line positions */
+.line-0 { top: 10%; transform: rotate(10deg); }
+.line-1 { top: 25%; transform: rotate(-5deg); }
+.line-2 { top: 40%; transform: rotate(15deg); }
+.line-3 { top: 55%; transform: rotate(-10deg); }
+.line-4 { top: 70%; transform: rotate(5deg); }
+.line-5 { top: 85%; transform: rotate(-15deg); }
+.line-6 { top: 30%; transform: rotate(25deg); left: -50%; }
+.line-7 { top: 60%; transform: rotate(-20deg); left: -30%; }
+
+/* Floating Dots */
+.floating-dot {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--bright-pink);
+  filter: blur(1px);
+  animation: float 15s infinite ease-in-out;
+  opacity: 0.5;
+}
+
+/* Dot sizes and positions */
+.dot-0 { width: 5px; height: 5px; top: 15%; left: 10%; animation-duration: 18s; }
+.dot-1 { width: 8px; height: 8px; top: 25%; left: 85%; animation-duration: 22s; background-color: var(--bright-orange); }
+.dot-2 { width: 6px; height: 6px; top: 40%; left: 20%; animation-duration: 16s; }
+.dot-3 { width: 10px; height: 10px; top: 60%; left: 70%; animation-duration: 25s; background-color: var(--vibrant-red); }
+.dot-4 { width: 4px; height: 4px; top: 75%; left: 30%; animation-duration: 20s; }
+.dot-5 { width: 7px; height: 7px; top: 20%; left: 50%; animation-duration: 19s; background-color: var(--deep-magenta); }
+.dot-6 { width: 9px; height: 9px; top: 50%; left: 10%; animation-duration: 24s; }
+.dot-7 { width: 5px; height: 5px; top: 65%; left: 90%; animation-duration: 17s; }
+.dot-8 { width: 6px; height: 6px; top: 35%; left: 75%; animation-duration: 21s; background-color: var(--bright-orange); }
+.dot-9 { width: 8px; height: 8px; top: 80%; left: 60%; animation-duration: 23s; }
+
+/* Animations */
+@keyframes moveLine {
+  0% { transform: translateX(-50%) rotate(var(--rotation, 0)); }
+  100% { transform: translateX(0%) rotate(var(--rotation, 0)); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(20px, 20px); }
+  50% { transform: translate(0, 40px); }
+  75% { transform: translate(-20px, 20px); }
+}
+
+/* Dark mode adjustments */
+.dark .background-animation {
+  opacity: 0.05;
+}
+
+.dark .animated-line {
+  opacity: 0.4;
+}
+
+.dark .floating-dot {
+  opacity: 0.2;
+}
+
+/* Transition for theme change */
+.App {
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Responsive adjustments */
@@ -46,10 +155,35 @@ main {
   main {
     padding: 1.5rem 0;
   }
+  
+  /* Reduce animation intensity on mobile */
+  .background-animation {
+    opacity: 0.05;
+  }
 }
 
 @media (max-width: 480px) {
   .content-container {
     padding: 0 1rem;
   }
+  
+  /* Simplify animations on very small screens */
+  .animated-line {
+    display: none;
+  }
+  
+  .floating-dot {
+    opacity: 0.2;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+

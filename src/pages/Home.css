@@ -1,18 +1,21 @@
 /* src/pages/Home/Home.css */
 .home-page {
   scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-spacing {
-  padding: 6rem 0;
+  margin: 0px;
+  padding: 0 0;
 }
 
 .dark-bg {
-  background-color: var(--extra-light-gray);
+  /* background-color: var(--extra-light-gray); */
 }
 
 [data-theme="dark"] .dark-bg {
-  background-color: rgba(30, 30, 30, 0.7);
+  /* background-color: rgba(30, 30, 30, 0.7); */
 }
 
 /* Responsive spacing */

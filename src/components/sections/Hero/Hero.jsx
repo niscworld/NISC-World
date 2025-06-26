@@ -134,7 +134,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <motion.div 
+      <motion.div hidden
         className="scroll-indicator"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
