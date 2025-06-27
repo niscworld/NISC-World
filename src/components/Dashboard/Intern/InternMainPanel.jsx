@@ -1,32 +1,30 @@
 // components/Dashboard/Intern/InternMainPanel.jsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import ViewMyInternship from './ViewMyInternship.jsx';
+import InternMessages from './InternMessages.jsx';
+
+import './InternMainPanel.css';
 
 function InternMainPanel({ selectedTab }) {
-  const [data, setData] = useState(null);
-  const user_id = localStorage.getItem('user_id');
+  const renderContent = () => {
+    switch (selectedTab) {
+      case 'view-my-internship':
+        return <ViewMyInternship />;
+      case 'view-messages':
+        return <InternMessages />;
+      default:
+        return <div className="intern-panel-message">Select a valid tab</div>;
+    }
+  };
 
-  useEffect(() => {
-    if (!selectedTab) return;
+  if (!selectedTab) return <div className="intern-panel-message">Select a tab</div>;
 
-    fetch('/api/dashboard/intern', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user_id, tab: selectedTab }),
-    })
-      .then((res) => res.json())
-      .then((result) => setData(result))
-      .catch((err) => console.error('Error fetching intern data:', err));
-  }, [selectedTab]);
-
-  if (!selectedTab) return <div>Select a tab</div>;
-  if (!data) return <div>Loading {selectedTab}...</div>;
+  const formatTab = (tab) => tab.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
 
   return (
-    <div>
-      <h2>{selectedTab.replace('-', ' ').toUpperCase()}</h2>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="intern-main-panel">
+      <h2 className="intern-heading">{formatTab(selectedTab)}</h2>
+      <div className="intern-panel-content">{renderContent()}</div>
     </div>
   );
 }

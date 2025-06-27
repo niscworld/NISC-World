@@ -111,15 +111,21 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
         >
+          
+          <Link key="/internships" to="/internships" > 
           <motion.button 
             className="cta-button"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
 
-          <Link key="/internships" to="/internships" > Internships </Link> <FaArrowRight className="arrow-icon" />
+          Internships 
+          <FaArrowRight className="arrow-icon" />
           
           </motion.button>
+          </Link> 
+
+          <Link key="/contact" to="/contact" > 
           <motion.button 
             className="secondary-button"
             whileHover={{ 
@@ -129,8 +135,9 @@ const Hero = () => {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link key="/contact" to="/contact" > Contact Us </Link>
+            Contact Us 
           </motion.button>
+            </Link>
         </motion.div>
       </div>
 
