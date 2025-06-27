@@ -1,4 +1,4 @@
-.view-applicants {
+.view-internships-container {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -6,162 +6,229 @@
   box-sizing: border-box;
 }
 
+/* Grid layout for internship cards */
+.view-internships-container > h3 {
+  margin-bottom: 1rem;
+}
+
+.view-internships-container > .internships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Internship Card */
 .internship-section {
-  background: var(--medium-gray);
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-left: 6px solid var(--bright-pink);
   border-radius: 10px;
   transition: transform 0.3s ease;
-  overflow-x: auto;
+  background-color: var(--pure-white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .internship-section:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.internship-title {
+  background-color: var(--black);
   color: var(--pure-white);
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
 }
 
-.internship-details {
-  font-size: 0.95rem;
-  color: var(--black);
-  margin-bottom: 1rem;
+.internship-section button {
+  margin-top: 0.5rem;
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.hr-table {
+.internship-section button:hover {
+  background-color: var(--vibrant-red);
+}
+
+/* Applicants Table */
+.applicants-table {
+  overflow-x: auto;
+}
+
+.applicants-table table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 650px;
+  background-color: var(--pure-white);
   font-size: 0.95rem;
-  min-width: 650px; /* 🔒 Ensures proper horizontal scroll */
 }
 
-.hr-table thead {
-  background: var(--bright-pink);
+.applicants-table thead {
+  background-color: var(--bright-pink);
   color: var(--pure-white);
 }
 
-.hr-table th,
-.hr-table td {
-  padding: 10px 12px;
+.applicants-table th,
+.applicants-table td {
+  padding: 12px;
   border-bottom: 1px solid var(--light-gray);
   vertical-align: top;
   text-align: left;
+  color: var(--black);
 }
 
-.hr-table tbody tr:hover {
-  background-color: var(--pure-white);
+.applicants-table tbody tr:hover {
+  background: var(--black);
 }
 
-.hr-table a {
+.applicants-table tbody tr:hover td {
+  color: var(--pure-white);
+}
+
+.applicants-table a {
   color: var(--link-color);
   text-decoration: underline;
 }
 
-.hr-table textarea {
-  border: 1px solid var(--light-gray);
-  border-radius: 6px;
-  padding: 6px;
-  resize: vertical;
-  font-size: 0.85rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.hr-table button {
+/* Action Buttons in Table */
+.applicants-table button {
+  margin-right: 8px;
+  margin-bottom: 4px;
   background-color: var(--deep-magenta);
   color: var(--pure-white);
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border-radius: 4px;
   font-size: 0.85rem;
   cursor: pointer;
-  margin-bottom: 4px;
   transition: background-color 0.3s ease;
 }
 
-.hr-table button:hover {
+.applicants-table button:hover {
   background-color: var(--vibrant-red);
 }
 
-.hr-table button:disabled {
-  background-color: var(--light-gray);
-  cursor: not-allowed;
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
-.action-status {
-  font-size: 0.8rem;
-  margin-top: 6px;
-  color: var(--medium-gray);
+.popup-content {
+  background: var(--pure-white);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ✅ Responsive Enhancements */
+.popup-content h4 {
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+.popup-content p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--dark-gray);
+}
+
+.popup-content a {
+  color: var(--link-color);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.popup-content textarea {
+  width: 100%;
+  border: 1px solid var(--light-gray);
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  resize: vertical;
+}
+
+.popup-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.popup-actions button {
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.popup-actions button:hover {
+  background-color: var(--vibrant-red);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 1024px) {
+  .view-internships-container > .internships-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
-  .view-applicants {
-    padding: 1rem;
+  .view-internships-container > .internships-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .internship-section {
-    padding: 1rem;
-  }
-
-  .internship-title {
-    font-size: 1.2rem;
-  }
-
-  .internship-details {
+  .applicants-table table {
     font-size: 0.9rem;
   }
 
-  .hr-table {
-    font-size: 0.9rem;
+  .popup-content {
+    padding: 1rem;
   }
 
-  .hr-table th,
-  .hr-table td {
-    padding: 8px 10px;
-  }
-
-  .hr-table textarea {
+  .popup-content p,
+  .popup-content textarea {
     font-size: 0.85rem;
   }
 
-  .hr-table button {
-    font-size: 0.8rem;
+  .popup-actions button {
+    font-size: 0.85rem;
     padding: 6px 10px;
-  }
-
-  .action-status {
-    font-size: 0.75rem;
   }
 }
 
 @media (max-width: 480px) {
-  .internship-title {
-    font-size: 1.05rem;
+  .view-internships-container > .internships-grid {
+    grid-template-columns: 1fr;
   }
 
-  .internship-details {
-    font-size: 0.85rem;
+  .popup-content {
+    width: 95%;
   }
 
-  .hr-table {
-    font-size: 0.85rem;
-  }
-
-  .hr-table textarea {
+  .popup-content textarea {
     font-size: 0.8rem;
   }
 
-  .hr-table button {
-    font-size: 0.75rem;
-    padding: 5px 8px;
+  .popup-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .action-status {
-    font-size: 0.7rem;
+  .popup-actions button {
+    width: 100%;
+    margin-top: 0.5rem;
   }
 }

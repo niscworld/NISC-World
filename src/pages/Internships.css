@@ -91,7 +91,7 @@
   flex-direction: row;
   gap: 1rem;
   overflow-y: auto;
-  max-height: 95vh;
+  max-height: 70vh;
 }
 
 .modal .left-panel {
