@@ -1,4 +1,4 @@
-const DEVELOPMENT_MODE = false;
+const DEVELOPMENT_MODE = !false;
 
 class API {
   static DEVELOPMENT_MODE = DEVELOPMENT_MODE;

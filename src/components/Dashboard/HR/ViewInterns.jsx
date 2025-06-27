@@ -3,50 +3,75 @@ import API from '../../../api/MainApi';
 import './ViewInterns.css';
 
 function ViewInterns() {
+  const [internships, setInternships] = useState([]);
   const [interns, setInterns] = useState([]);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [selectedInternshipCode, setSelectedInternshipCode] = useState(null);
+  const [selectedInternshipTitle, setSelectedInternshipTitle] = useState(null);
   const [selectedIntern, setSelectedIntern] = useState(null);
   const [messageData, setMessageData] = useState({ subject: '', body: '' });
   const [statusMessage, setStatusMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const user_id = localStorage.getItem('user_id');
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('position');
 
-useEffect(() => {
-  const fetchInterns = async () => {
+  // Fetch internships on load
+  useEffect(() => {
+    const fetchInternships = async () => {
+      try {
+        const res = await fetch(`${API.DASHBOARD_HR_ENDPOINT}/get-internships`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id, token, role }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data?.error || 'Failed to fetch internships');
+        setInternships(data.internships || []);
+      } catch (err) {
+        setErrorMsg(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInternships();
+  }, [user_id, token, role]);
+
+  // Fetch interns for a specific internship
+  const fetchInterns = async (internshipTitle, internshipCode) => {
+    setSelectedInternshipCode(internshipCode);
+    setSelectedInternshipTitle(internshipTitle);
+    setLoading(true);
+    setInterns([]);
     try {
       const res = await fetch(`${API.INTERNSHIPS_API}/view-interns`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user_id, token, role }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id, token, role, internship_code: internshipCode }),
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        console.error('API Error:', data?.error || 'Unknown error');
-        throw new Error(data?.error || 'Failed to fetch interns');
-      }
-
-      setInterns(data);
+      if (!res.ok) throw new Error(data?.error || 'Failed to fetch interns');
+      setInterns(data || []);
     } catch (err) {
-      console.error('Fetch error:', err.message);
-      setErrorMsg(err.message)
+      setErrorMsg(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  fetchInterns();
-}, [user_id, token, role]);
-
   const handleSendMessage = async () => {
-    if (!selectedIntern || !messageData.subject || !messageData.body) {
-      setStatusMessage('❌ Fill all fields and select an intern.');
+    if (!selectedIntern){
+      setStatusMessage('❌ Select an intern.');
+      return;
+    }
+    if(!messageData.subject || !messageData.body) {
+      setStatusMessage('❌ Fill all fields.');
       return;
     }
 
@@ -77,26 +102,45 @@ useEffect(() => {
 
   return (
     <div className="view-interns-container">
-      <h3>👨‍🎓 Current Interns</h3>
+      <h3>📋 Internships</h3>
 
-      {loading ? (
-        <p>Loading interns...</p>
-      ) : errorMsg ? (
-        <p>{errorMsg}</p>
-      ) : interns.length === 0 ? (
-        <p>No interns currently enrolled.</p>
-      ) : (
-        <ul className="intern-list">
-          {interns.map((intern) => (
-            <li key={intern.user_id + intern.internship_code} className="intern-card">
-              <h4>{intern.fullname}</h4>
-              <p><strong>Email:</strong> {intern.email}</p>
-              <p><strong>Internship:</strong> {intern.internship_title}</p>
-              <p><strong>Status:</strong> {intern.completion_status}</p>
-              <button onClick={() => {setSelectedIntern(intern); setStatusMessage('')}}>📩 Message</button>
-            </li>
+      {loading && <p>Loading...</p>}
+      {errorMsg && <p className="error">{errorMsg}</p>}
+
+      {/* Show internship list first */}
+      {!loading && !selectedInternshipCode && (
+        <div className="internships-grid">
+          {internships.map((i) => (
+            <div key={i.code} className="internship-section">
+              <strong>{i.title} ({i.code})</strong>
+              <br />
+              <button onClick={() => fetchInterns(i.title, i.code)}>View Interns</button>
+            </div>
           ))}
-        </ul>
+        </div>
+      )}
+
+      {/* Show interns for selected internship */}
+      {selectedInternshipCode && !loading && (
+        <>
+          <h4><button className='back-button' onClick={() => setSelectedInternshipCode(null)}>&lt;</button> 👨‍🎓 Interns for Internship: {selectedInternshipTitle} ({selectedInternshipCode})</h4>
+
+          {interns.length === 0 ? (
+            <p>No interns currently enrolled.</p>
+          ) : (
+            <ul className="intern-list">
+              {interns.map((intern) => (
+                <li key={intern.user_id + intern.internship_code} className="intern-card">
+                  <h4>{intern.fullname}</h4>
+                  <p><strong>Email:</strong> {intern.email}</p>
+                  <p><strong>Internship:</strong> {intern.internship_title}</p>
+                  <p><strong>Status:</strong> {intern.completion_status}</p>
+                  <button onClick={() => { setSelectedIntern(intern); setStatusMessage(''); }}>📩 Message</button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
 
       {/* Modal */}
