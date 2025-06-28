@@ -17,7 +17,6 @@ function ViewInterns() {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('position');
 
-  // Fetch internships on load
   useEffect(() => {
     const fetchInternships = async () => {
       try {
@@ -41,7 +40,6 @@ function ViewInterns() {
     fetchInternships();
   }, [user_id, token, role]);
 
-  // Fetch interns for a specific internship
   const fetchInterns = async (internshipTitle, internshipCode) => {
     setSelectedInternshipCode(internshipCode);
     setSelectedInternshipTitle(internshipTitle);
@@ -65,18 +63,52 @@ function ViewInterns() {
     }
   };
 
-  const handleSendMessage = async () => {
-    if (!selectedIntern){
+  const sendInAppMessage = async () => {
+    if (!selectedIntern) {
       setStatusMessage('❌ Select an intern.');
       return;
     }
-    if(!messageData.subject || !messageData.body) {
+    if (!messageData.subject || !messageData.body) {
       setStatusMessage('❌ Fill all fields.');
       return;
     }
 
     try {
       const res = await fetch(`${API.SEND_MESSAGE_TO_INTERN}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: selectedIntern.user_id,
+          subject: messageData.subject,
+          body: messageData.body,
+          sender_id: user_id,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setStatusMessage('✅ In-app message sent successfully.');
+      } else {
+        throw new Error(result?.message || 'Failed to send in-app message.');
+      }
+    } catch (err) {
+      setStatusMessage(`❌ ${err.message}`);
+    }
+  };
+
+  const sendEmailMessage = async () => {
+    if (!selectedIntern) {
+      setStatusMessage('❌ Select an intern.');
+      return;
+    }
+    if (!messageData.subject || !messageData.body) {
+      setStatusMessage('❌ Fill all fields.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API.SEND_MAIL_MESSAGE_TO_INTERN}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -89,14 +121,12 @@ function ViewInterns() {
       const result = await res.json();
 
       if (res.ok) {
-        setStatusMessage('✅ Message sent successfully!');
-        setMessageData({ subject: '', body: '' });
-        setSelectedIntern(null);
+        setStatusMessage('✅ Email sent successfully.');
       } else {
-        setStatusMessage(result.message || '❌ Failed to send message.');
+        throw new Error(result?.message || 'Failed to send email.');
       }
     } catch (err) {
-      setStatusMessage('❌ Server error.');
+      setStatusMessage(`❌ ${err.message}`);
     }
   };
 
@@ -107,7 +137,6 @@ function ViewInterns() {
       {loading && <p>Loading...</p>}
       {errorMsg && <p className="error">{errorMsg}</p>}
 
-      {/* Show internship list first */}
       {!loading && !selectedInternshipCode && (
         <div className="internships-grid">
           {internships.map((i) => (
@@ -120,10 +149,12 @@ function ViewInterns() {
         </div>
       )}
 
-      {/* Show interns for selected internship */}
       {selectedInternshipCode && !loading && (
         <>
-          <h4><button className='back-button' onClick={() => setSelectedInternshipCode(null)}>&lt;</button> 👨‍🎓 Interns for Internship: {selectedInternshipTitle} ({selectedInternshipCode})</h4>
+          <h4>
+            <button className='back-button' onClick={() => setSelectedInternshipCode(null)}>&lt;</button>
+            👨‍🎓 Interns for Internship: {selectedInternshipTitle} ({selectedInternshipCode})
+          </h4>
 
           {interns.length === 0 ? (
             <p>No interns currently enrolled.</p>
@@ -143,7 +174,6 @@ function ViewInterns() {
         </>
       )}
 
-      {/* Modal */}
       {selectedIntern && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -161,7 +191,8 @@ function ViewInterns() {
               onChange={(e) => setMessageData({ ...messageData, body: e.target.value })}
             />
             <div className="modal-actions">
-              <button onClick={handleSendMessage}>Send</button>
+              <button onClick={sendInAppMessage}>📲 Send In-App</button>
+              <button onClick={sendEmailMessage}>📧 Send Email</button>
               <button className="cancel-btn" onClick={() => setSelectedIntern(null)}>Cancel</button>
             </div>
             {statusMessage && <p className="status">{statusMessage}</p>}

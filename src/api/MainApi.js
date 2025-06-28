@@ -1,4 +1,4 @@
-const DEVELOPMENT_MODE = false;
+const DEVELOPMENT_MODE = !false;
 
 class API {
   static DEVELOPMENT_MODE = DEVELOPMENT_MODE;
@@ -36,6 +36,9 @@ class API {
   static ACCEPT_INTERNSHIP = `${API.INTERNSHIPS_API}/accept-internship`
   static REJECT_INTERNSHIP = `${API.INTERNSHIPS_API}/reject-internship`
   static SEND_MESSAGE_TO_INTERN = `${API.INTERNSHIPS_API}/send-message-to-intern`
+  // static GET_GROUP_MESSAGES = `${API.INTERNSHIPS_API}/get-group-messages`
+  static GET_INTERN_MESSAGES = `${API.INTERNSHIPS_API}/get-intern-messages`
+  static SEND_MAIL_MESSAGE_TO_INTERN = `${API.INTERNSHIPS_API}/send-mail-message-to-intern`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;

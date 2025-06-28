@@ -1,0 +1,73 @@
+/* InternMessages.css */
+
+/* InternMessages container */
+.intern-messages-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.intern-messages-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin-bottom: 20px;
+}
+
+.intern-messages-container p {
+  color: var(--medium-gray);
+  font-size: 16px;
+}
+
+.intern-messages-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.intern-messages-container li {
+  padding: 15px;
+  /* background-color: var(--extra-light-gray); */
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+  border-left: 4px solid var(--secondary-pink); /* Added accent line */
+}
+
+.intern-messages-container li:hover {
+  /* background-color: var(--hover-bg); */
+  transform: translateY(-2px);
+}
+
+.intern-messages-container li strong {
+  font-size: 18px;
+  color: var(--deep-magenta);
+}
+
+.intern-messages-container li p {
+  font-size: 14px;
+  color: var(--black);
+  margin-top: 5px;
+}
+
+.intern-messages-container li small {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--black);
+}
+
+.intern-messages-container .loading {
+  font-size: 18px;
+  color: var(--bright-pink);
+  text-align: center;
+  margin-top: 50px;
+}
+
+.intern-messages-container .error {
+  color: var(--vibrant-red);
+  text-align: center;
+  margin-top: 50px;
+  font-size: 16px;
+}
+
