@@ -9,6 +9,8 @@ function HRSidebar({ onSelect }) {
       <ul className="sidebar-list">
         <li onClick={() => onSelect('view-applicants')}>📄 View Applicants</li>
         <li onClick={() => onSelect('view-interns')}>👨‍🎓 View Interns</li>
+        <li onClick={() => onSelect('edit-internship')}>📝 Edit Internship</li>
+        <li onClick={() => onSelect('add-internship')}>🏆 Add Internship</li>
       </ul>
     </div>
   );

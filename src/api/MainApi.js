@@ -28,7 +28,10 @@ class API {
 
   static INTERNSHIPS = `${API.BASE_URL}/internships`
   static INTERNSHIPS_API = `${API.INTERNSHIPS}/api`
+  static CREATE_INTERNSHIP = `${API.INTERNSHIPS_API}/create-internships`
+  static UPDATE_INTERNSHIPS = `${API.INTERNSHIPS_API}/update-internships`
   static GET_INTERNSHIPS = `${API.INTERNSHIPS_API}/get-internships`
+  static GET_INTERNSHIPS_DETAILS = `${API.INTERNSHIPS_API}/get-internships-details`
   static APPLY_INTERNSHIP = `${API.INTERNSHIPS_API}/apply-internship`
   static ACCEPT_INTERNSHIP = `${API.INTERNSHIPS_API}/accept-internship`
   static REJECT_INTERNSHIP = `${API.INTERNSHIPS_API}/reject-internship`

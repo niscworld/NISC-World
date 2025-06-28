@@ -91,6 +91,8 @@ const MouseRing = () => {
     };
   }, []);
 
+  return <></>
+
   return (
     <>
       <div 
