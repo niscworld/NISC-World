@@ -1,33 +1,28 @@
-// components/Dashboard/Owner/OwnerMainPanel.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import SignInAs from "./SignInAs.jsx";
+
+import './OwnerMainPanel.css';
 
 function OwnerMainPanel({ selectedTab }) {
-  const [data, setData] = useState(null);
-  const user_id = localStorage.getItem('user_id');
 
-  useEffect(() => {
-    if (!selectedTab) return;
+  // Render the appropriate content based on selectedTab
+  const renderContent = () => {
+    switch (selectedTab) {
+      case 'sign-in':
+        return <SignInAs />
+      default:
+        return <div className="owner-panel-message">Select a valid tab</div>;
+    }
+  };
 
-    fetch('/api/dashboard/owner', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user_id, tab: selectedTab }),
-    })
-      .then((res) => res.json())
-      .then((result) => setData(result))
-      .catch((err) => console.error('Error fetching owner data:', err));
-  }, [selectedTab]);
-
-  if (!selectedTab) return <div>Please select a section</div>;
-  if (!data) return <div>Loading {selectedTab}...</div>;
+  if (!selectedTab) return <div className="owner-panel-message">Select a tab</div>;
 
   return (
-    <div>
-      <h2>{selectedTab.replace('-', ' ').toUpperCase()}</h2>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      {/* ✅ You can replace <pre> with styled UI components later */}
+    <div className="owner-main-panel">
+      <h2 className="owner-heading">{selectedTab.replace('-', ' ').toUpperCase()}</h2>
+      <div className="owner-panel-content">
+        {renderContent()}
+      </div>
     </div>
   );
 }

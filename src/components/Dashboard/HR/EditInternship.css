@@ -11,6 +11,10 @@
   margin-bottom: 1.5rem;
 }
 
+.intern-card h4 {
+  color: var(--black);
+}
+
 .edit-internship p {
   font-size: 0.95rem;
   margin-bottom: 1rem;
@@ -35,9 +39,10 @@
 }
 
 .edit-internship li:hover {
-  background-color: var(--black);
-  color: var(--pure-white);
+  background-color: transparent;
   transform: translateY(-2px);
+  border-right: 2px solid var(--deep-magenta);
+  border-left: 2px solid var(--deep-magenta);
 }
 
 /* Back button */

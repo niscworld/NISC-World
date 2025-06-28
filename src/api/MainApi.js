@@ -52,6 +52,10 @@ class API {
 
   static DASHBOARD_HR = `${API.DASHBOARD}/hr`;
   static DASHBOARD_HR_ENDPOINT = `${API.DASHBOARD_HR}/api`;
+
+  static DASHBOARD_OWNER = `${API.DASHBOARD}/owner`;
+  static DASHBOARD_OWNER_API = `${API.DASHBOARD_OWNER}/api`;
+  static OWNER_SIGNIN_AS = `${API.DASHBOARD_OWNER_API}/sign-in-as`;
   
 
 }
