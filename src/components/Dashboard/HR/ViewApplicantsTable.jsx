@@ -62,23 +62,44 @@ function ViewApplicantsTable() {
   };
 
   const handleDecision = async () => {
-    const apiUrl = popupType === 'accept' ? API.ACCEPT_INTERNSHIP : API.REJECT_INTERNSHIP;
-    try {
-      const res = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_id, token, role,
-          email: selected.email,
-          internship_code: selected.internship_code,
-          message,
-        }),
-      });
-      if (!res.ok) throw new Error(await res.text());
-      setApplicants(prev => prev.filter(a => a.email !== selected.email));
-      setPopupVisible(false);
-    } catch (e) {
-      alert(e.message);
+    if( popupType === 'contact' ) {
+      const apiUrl = API.SEND_MESSAGE_TO_APPLICANT;
+      try {
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id, token, role,
+            email: selected.email,
+            internship_code: selected.internship_code,
+            message,
+          }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        setApplicants(prev => prev.filter(a => a.email !== selected.email));
+        setPopupVisible(false);
+      } catch (e) {
+        alert(e.message);
+      }
+    } else {
+      const apiUrl = popupType === 'accept' ? API.ACCEPT_INTERNSHIP : API.REJECT_INTERNSHIP;
+      try {
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id, token, role,
+            email: selected.email,
+            internship_code: selected.internship_code,
+            message,
+          }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        setApplicants(prev => prev.filter(a => a.email !== selected.email));
+        setPopupVisible(false);
+      } catch (e) {
+        alert(e.message);
+      }
     }
   };
 
@@ -107,6 +128,7 @@ function ViewApplicantsTable() {
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Resume</th>
+                <th>Contact</th>
                 <th>Applied On</th>
                 <th>Action</th>
               </tr>
@@ -121,6 +143,7 @@ function ViewApplicantsTable() {
                       <a href={a.resume_url} target="_blank" rel="noreferrer">View Resume</a>
                     ) : 'N/A'}
                   </td>
+                  <td><button onClick={() => openPopup(a, a.internship_code, 'contact')}>Send Message</button></td>
                   <td>{new Date(a.applied_on).toLocaleString()}</td>
                   <td>
                     <button onClick={() => openPopup(a, a.internship_code, 'accept')}>Accept</button>
@@ -138,7 +161,7 @@ function ViewApplicantsTable() {
       {popupVisible && selected && (
         <div className="popup">
           <div className="popup-content">
-            <h4>{popupType === 'accept' ? 'Accept Applicant' : 'Reject Applicant'}</h4>
+            <h4>{popupType.toLocaleUpperCase() + ' Applicant'}</h4>
             <p><strong>Full Name:</strong> {selected.fullname}</p>
             <p><strong>Email:</strong> {selected.email}</p>
             <p><strong>Internship Code:</strong> {selected.internship_code}</p>
@@ -149,7 +172,7 @@ function ViewApplicantsTable() {
               </p>
             )}
             <textarea
-              placeholder="Optional message from HR..."
+              placeholder="Message from HR..."
               value={message}
               onChange={e => setMessage(e.target.value)}
               rows={4}

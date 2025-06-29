@@ -1,4 +1,4 @@
-const DEVELOPMENT_MODE = false;
+const DEVELOPMENT_MODE = !false;
 
 class API {
   static DEVELOPMENT_MODE = DEVELOPMENT_MODE;
@@ -52,6 +52,7 @@ class API {
 
   static DASHBOARD_HR = `${API.DASHBOARD}/hr`;
   static DASHBOARD_HR_ENDPOINT = `${API.DASHBOARD_HR}/api`;
+  static SEND_MESSAGE_TO_APPLICANT = `${API.DASHBOARD_HR_ENDPOINT}/send-message-to-applicant`
 
   static DASHBOARD_OWNER = `${API.DASHBOARD}/owner`;
   static DASHBOARD_OWNER_API = `${API.DASHBOARD_OWNER}/api`;
