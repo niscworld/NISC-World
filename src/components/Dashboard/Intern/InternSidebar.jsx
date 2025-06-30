@@ -18,6 +18,12 @@ function InternSidebar({ onSelect, selectedTab }) {
         >
           💬 View Messages
         </li>
+        <li
+          className={selectedTab === 'submit-assignment' ? 'active' : ''}
+          onClick={() => onSelect('submit-assignment')}
+        >
+          📖Submit Assignment
+        </li>
       </ul>
     </div>
   );

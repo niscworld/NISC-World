@@ -39,6 +39,7 @@ class API {
   // static GET_GROUP_MESSAGES = `${API.INTERNSHIPS_API}/get-group-messages`
   static GET_INTERN_MESSAGES = `${API.INTERNSHIPS_API}/get-intern-messages`
   static SEND_MAIL_MESSAGE_TO_INTERN = `${API.INTERNSHIPS_API}/send-mail-message-to-intern`
+  static INTERN_SUBMIT_ASSIGNMENT = `${API.INTERNSHIPS_API}/intern-submit-assignment`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;

@@ -1,0 +1,101 @@
+/* InternSubmitAssignment.css */
+
+.submit-assignment-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--deep-magenta);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  /* color: var(--pure-white); */
+}
+
+.submit-assignment-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--pure-white);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.submit-assignment-container p {
+  /* color: var(--medium-gray, #666); */
+  font-size: 16px;
+  margin: 10px 0;
+  word-break: break-word;
+}
+
+.submit-assignment-container a {
+  color: var(--black);
+  text-decoration: underline;
+}
+
+.submit-assignment-container a:hover,
+.submit-assignment-container a:focus {
+  color: var(--bright-pink, #ff007f);
+  outline: none;
+}
+
+.submit-assignment-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.submit-assignment-container label {
+  font-weight: 600;
+  font-size: 16px;
+  /* color: var(--deep-magenta, #8b008b); */
+}
+
+.submit-assignment-container input[type="url"] {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 2px solid var(--extra-light-gray, #ddd);
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.submit-assignment-container input[type="url"]:focus {
+  border-color: var(--secondary-pink, #d6336c);
+  outline: none;
+  box-shadow: 0 0 6px rgba(214, 51, 108, 0.5);
+}
+
+.submit-assignment-container button {
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background-color: var(--secondary-pink, #d6336c);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-assignment-container button:hover,
+.submit-assignment-container button:focus {
+  background-color: var(--bright-pink, #ff007f);
+  outline: none;
+}
+
+.submit-assignment-message {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--medium-gray, #666);
+  text-align: center;
+}
+
+.submit-assignment-message.error {
+  color: var(--vibrant-red, #e63946);
+}
+
+.loading-text {
+  font-size: 18px;
+  color: var(--bright-pink, #ff007f);
+  text-align: center;
+  margin-top: 50px;
+}

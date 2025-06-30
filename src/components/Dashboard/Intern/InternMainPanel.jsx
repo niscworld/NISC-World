@@ -2,6 +2,7 @@
 import React from 'react';
 import ViewMyInternship from './ViewMyInternship.jsx';
 import InternMessages from './InternMessages.jsx';
+import SubmitAssignment from './SubmitAssignment.jsx';
 
 import './InternMainPanel.css';
 
@@ -12,6 +13,8 @@ function InternMainPanel({ selectedTab }) {
         return <ViewMyInternship />;
       case 'view-messages':
         return <InternMessages />;
+      case 'submit-assignment':
+        return <SubmitAssignment />
       default:
         return <div className="intern-panel-message">Select a valid tab</div>;
     }
