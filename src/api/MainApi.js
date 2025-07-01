@@ -1,4 +1,4 @@
-const DEVELOPMENT_MODE = false;
+const DEVELOPMENT_MODE = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
 class API {
   static DEVELOPMENT_MODE = DEVELOPMENT_MODE;
