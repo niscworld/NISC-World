@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import { FaLinkedin, FaTwitter, FaGithub, FaUserTie } from 'react-icons/fa';
@@ -16,7 +16,7 @@ import './Team.css';
 const Team = () => {
   const { isDarkMode } = useTheme();
 
-  const teamMembers = [
+  const [teamMembers, setTeamMembers] = useState([
     {
       name: "P Rushvitha Devi",
       role: "Founder & Owner",
@@ -39,7 +39,7 @@ const Team = () => {
         github: "#"
       },
       photo: srinivasPhoto,
-      visible: true
+      visible: false
     },
     {
       name: "N Rekash",
@@ -89,7 +89,7 @@ const Team = () => {
       photo: mohoseenPhoto,
       visible: true
     },
-  ];
+  ]);
 
   const owners = teamMembers.filter(
     (member) => member.visible && (member.role.toLowerCase().includes("founder") || member.role.toLowerCase().includes("owner"))
@@ -155,6 +155,38 @@ const Team = () => {
       </div>
     </div>
   );
+
+  // Function to update visibility of CEO
+  const checkOpenings = (secret) => {
+    if(secret === "CEO") {
+      setTeamMembers(prevMembers =>
+        prevMembers.map(member =>
+          member.role.includes("CEO") ? { ...member, visible: true } : member
+        )
+      );
+    }
+  };
+
+  let keyPressString = "";
+  document.addEventListener('keydown', (e) => {
+    let key = e.key.toUpperCase();
+    // console.log(key);
+
+    if (['C', 'E', 'O'].includes(key)) {
+      keyPressString += key;
+    } else {
+      keyPressString = '';
+      return;
+    }
+
+    // console.log(keyPressString);
+
+    if (keyPressString === "CEO") {
+      checkOpenings(keyPressString);
+      console.log("CEO sequence detected!");
+      keyPressString = '';  // Reset after successful sequence
+    }
+  });
 
   return (
     <section className={`team-section ${isDarkMode ? 'dark' : 'light'}`} id="team">
