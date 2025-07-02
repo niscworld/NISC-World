@@ -22,7 +22,7 @@ function InternSidebar({ onSelect, selectedTab }) {
           className={selectedTab === 'submit-assignment' ? 'active' : ''}
           onClick={() => onSelect('submit-assignment')}
         >
-          📖Submit Assignment
+          📖Final Assignment Submission
         </li>
       </ul>
     </div>
