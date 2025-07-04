@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import html2pdf from 'html2pdf.js';
 import './OfferLetter.css';
+import niscBanner from './assets/nisc_banner.png';
+import logo from './assets/logo.png';
 
 const OfferLetter = () => {
   // State for dynamic values
@@ -28,18 +31,42 @@ const OfferLetter = () => {
   // Function to download the offer letter as PDF
   const downloadOfferLetter = () => {
     const element = document.getElementById('offer-letter');
+    
+    // Clone the element to avoid modifying the original
+    const clonedElement = element.cloneNode(true);
+    
+    // Make sure all text is black for the PDF
+    clonedElement.querySelectorAll('*').forEach(el => {
+      el.style.color = '#000000';
+      el.style.fontFamily = 'Arial, sans-serif';
+    });
+
     const opt = {
       margin: 10,
       filename: `NISC_OfferLetter_${offerData.candidateName}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      image: { 
+        type: 'jpeg', 
+        quality: 0.98 
+      },
+      html2canvas: { 
+        scale: 2,
+        logging: true,
+        useCORS: true,
+        allowTaint: true,
+        letterRendering: true
+      },
+      jsPDF: { 
+        unit: 'mm', 
+        format: 'a4', 
+        orientation: 'portrait',
+        hotfixes: ["px_scaling"]
+      }
     };
 
-    // Use html2pdf library (you'll need to install it)
-    import('html2pdf.js').then((html2pdf) => {
-      html2pdf.default().from(element).set(opt).save();
-    });
+    html2pdf()
+      .set(opt)
+      .from(clonedElement)
+      .save();
   };
 
   return (
@@ -143,10 +170,10 @@ const OfferLetter = () => {
 
       <div id="offer-letter" className="offer-letter">
         <div className="banner">
-          <img src="./assets/nisc_banner.png" alt="NISC Banner" />
+          <img src={niscBanner} alt="NISC Banner" />
         </div>
         <div className="watermark">
-          <img src="/logo.png" alt="NISC Logo" />
+          <img src={logo} alt="NISC Logo" />
         </div>
         <div className="letter-content">
           <h1>INTERNSHIP OFFER LETTER</h1>
