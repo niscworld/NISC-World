@@ -6,6 +6,8 @@ import './InternSubmitAssignment.css'; // Make sure this path matches your file 
 function SubmitAssignment() {
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [url, setUrl] = useState('');
+  const [grade, setGrade] = useState(0);
+  const [remarks, setRemarks] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -75,6 +77,8 @@ function SubmitAssignment() {
         setMessage('Assignment submitted successfully.');
         setIsSubmitted(true);
         setUrl(submissionData.url);
+        setGrade(submissionData.grade);
+        setRemarks(submissionData.remarks);
       } else {
         setMessage(result.message || 'Submission failed.');
       }
@@ -103,6 +107,10 @@ function SubmitAssignment() {
                 {url}
               </a>
             </u>
+            <br />
+            Grade: {grade}
+            <br />
+            {/* Remarks: {remarks} */}
           </p>
         </>
       ) : (

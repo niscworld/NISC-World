@@ -40,6 +40,8 @@ class API {
   static GET_INTERN_MESSAGES = `${API.INTERNSHIPS_API}/get-intern-messages`
   static SEND_MAIL_MESSAGE_TO_INTERN = `${API.INTERNSHIPS_API}/send-mail-message-to-intern`
   static INTERN_SUBMIT_ASSIGNMENT = `${API.INTERNSHIPS_API}/intern-submit-assignment`
+  static REJECT_FINAL_ASSIGNMENT = `${API.INTERNSHIPS_API}/reject-final-assignment`
+  static ACCEPT_FINAL_ASSIGNMENT = `${API.INTERNSHIPS_API}/accept-final-assignment`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;

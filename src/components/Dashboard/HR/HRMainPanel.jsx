@@ -1,6 +1,7 @@
 import React from 'react';
 import ViewApplicantsTable from './ViewApplicantsTable.jsx';
 import ViewInterns from './ViewInterns.jsx';
+import ViewInternsSubmissions from './ViewInternsSubmissions.jsx';
 import AddInternship from './AddInternship.jsx';
 import EditInternship from './EditInternship.jsx';
 
@@ -13,6 +14,8 @@ function HRMainPanel({ selectedTab }) {
         return <ViewApplicantsTable />;
       case 'view-interns':
         return <ViewInterns />
+      case 'view-interns-submissions':
+        return <ViewInternsSubmissions />
       case 'add-internship':
         return <AddInternship />
       case 'edit-internship':

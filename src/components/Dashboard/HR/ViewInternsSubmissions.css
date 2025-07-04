@@ -1,0 +1,397 @@
+.view-interns-container {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-sizing: border-box;
+  color: var(--black);
+  min-height: 100vh;
+}
+
+.view-interns-container > h3 {
+  margin-bottom: 1rem;
+}
+
+.internships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.internship-section {
+  padding: 1.2rem;
+  border-left: 6px solid var(--bright-pink);
+  border-radius: 10px;
+  background-color: var(--pure-white);
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.internship-section:hover {
+  transform: translateY(-3px);
+  background-color: var(--black);
+  color: var(--pure-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.internship-section button {
+  margin-top: 0.5rem;
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.internship-section button:hover {
+  background-color: var(--vibrant-red);
+}
+
+.back-button {
+  background: transparent;
+  color: var(--black);
+  transform: scale(1.4);
+  border: 1px solid var(--black);
+  padding: 0rem 0.2rem;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.back-button:hover {
+  background-color: var(--black);
+  color: var(--pure-white);
+}
+
+.intern-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+.intern-card {
+  background-color: var(--deep-magenta);
+  color: var(--pure-white);
+  padding: 1rem;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+
+.intern-card:hover {
+  transform: translateY(-5px);
+  background-color: var(--bright-pink);
+}
+
+.intern-card h4 {
+  margin-bottom: 0.6rem;
+  color: var(--pure-white);
+}
+
+.intern-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.intern-card button {
+  margin-top: 0.8rem;
+  background-color: var(--bright-orange);
+  color: var(--pure-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.intern-card button:hover {
+  background-color: var(--vibrant-red);
+}
+
+.intern-details-view {
+  background-color: var(--pure-white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.intern-details {
+  margin: 1.5rem 0;
+}
+
+.intern-details p {
+  margin: 0.8rem 0;
+  color: var(--black);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.grade-button {
+  background-color: var(--bright-orange);
+  color: var(--pure-white);
+}
+
+.reject-button {
+  background-color: var(--vibrant-red);
+  color: var(--pure-white);
+}
+
+.grade-screen,
+.reject-screen {
+  background-color: var(--pure-white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--black);
+}
+
+.rating-section {
+  margin: 1.5rem 0;
+}
+
+.stars {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.stars span {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--light-gray);
+}
+
+.stars .filled {
+  color: var(--bright-orange);
+}
+
+.feedback-section,
+.reject-reason {
+  margin: 1.5rem 0;
+}
+
+.feedback-section textarea,
+.reject-reason textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  min-height: 120px;
+  margin-top: 0.5rem;
+}
+
+.submit-grade {
+  background-color: var(--bright-orange);
+  color: var(--pure-white);
+}
+
+.confirm-reject {
+  background-color: var(--vibrant-red);
+  color: var(--pure-white);
+}
+
+.confirmation-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmation-content {
+  background-color: var(--pure-white);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  color: var(--black);
+}
+
+.error {
+  color: var(--vibrant-red);
+  padding: 0.5rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+/* Excellence Toggle Styles */
+.excellence-toggle {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--bright-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .internships-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .intern-card {
+    width: 100%;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-interns-container {
+    padding: 1rem;
+  }
+  
+  .internship-section {
+    padding: 1rem;
+  }
+  
+  .grade-screen,
+  .reject-screen {
+    padding: 1rem;
+  }
+  
+  .toggle-switch {
+    width: 50px;
+    height: 28px;
+  }
+  
+  .slider:before {
+    height: 20px;
+    width: 20px;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+}
+
+/* Excellence Toggle Styles */
+.excellence-toggle {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--bright-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
