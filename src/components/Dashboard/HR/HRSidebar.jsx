@@ -12,6 +12,7 @@ function HRSidebar({ onSelect }) {
         <li onClick={() => onSelect('view-interns-submissions')}>👨‍🎓 View Interns Submissions</li>
         <li onClick={() => onSelect('edit-internship')}>📝 Edit Internship</li>
         <li onClick={() => onSelect('add-internship')}>🏆 Add Internship</li>
+        <li onClick={() => onSelect('offer-letter')}>Offer Letter</li>
       </ul>
     </div>
   );

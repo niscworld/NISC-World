@@ -4,6 +4,7 @@ import ViewInterns from './ViewInterns.jsx';
 import ViewInternsSubmissions from './ViewInternsSubmissions.jsx';
 import AddInternship from './AddInternship.jsx';
 import EditInternship from './EditInternship.jsx';
+import OfferLetter from './OfferLetter.jsx';
 
 import "./HRMainPanel.css";
 
@@ -20,6 +21,8 @@ function HRMainPanel({ selectedTab }) {
         return <AddInternship />
       case 'edit-internship':
         return <EditInternship />
+      case 'offer-letter':
+        return <OfferLetter />
       // You can add more HR-specific tabs here in the future
       default:
         return <div className="hr-panel-message">Select a valid tab</div>;

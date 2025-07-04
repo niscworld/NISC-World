@@ -1,0 +1,131 @@
+.offer-letter-container > * {
+  color: black;
+}
+
+  .offer-letter-container {
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+}
+
+.form-section {
+  width: 300px;
+  padding: 20px;
+  background: #f5f5f5 !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.download-btn {
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.download-btn:hover {
+  background-color: #1a252f;
+}
+
+.offer-letter {
+  flex: 1;
+  background: white;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  min-height: 1000px;
+}
+
+.banner img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.watermark img {
+  width: 400px;
+}
+
+.letter-content {
+  position: relative;
+  z-index: 1;
+}
+
+.letter-content h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+.letter-content .date {
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+.letter-content .salutation {
+  margin-bottom: 20px;
+}
+
+.letter-content p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.letter-content h2 {
+  color: #2c3e50;
+  margin: 25px 0 15px 0;
+  font-size: 1.2em;
+}
+
+.letter-content ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.letter-content li {
+  margin-bottom: 8px;
+}
+
+.signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+}
+
+.signature {
+  text-align: center;
+}
+
+.signature p:first-child {
+  margin-bottom: 40px;
+}
