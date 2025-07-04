@@ -1,200 +1,308 @@
-/* Main container styles */
 .offer-letter-container {
   display: flex;
   padding: 20px;
   gap: 30px;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  position: relative;
 }
 
-/* Force all text to be black */
-.offer-letter-container,
-.offer-letter-container * {
-  color: #000000 !important;
-}
-
-/* Form section styles */
 .form-section {
-  width: 300px;
+  width: 350px;
   padding: 20px;
-  background: #f5f5f5;
+  background: #f8f9fa;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 20px;
   height: fit-content;
 }
 
-.form-section h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: 600;
+  color: #495057;
 }
 
 .form-group input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
   border-radius: 4px;
-  background: white;
+  font-size: 14px;
 }
 
-.download-btn {
-  background-color: #2c3e50;
-  color: white !important;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
-  width: 100%;
-  transition: background-color 0.3s;
+.form-group.has-error input {
+  border-color: #dc3545;
 }
 
-.download-btn:hover {
-  background-color: #1a252f;
-}
-
-/* Offer letter preview styles */
-.offer-letter {
-  flex: 1;
-  background: white;
-  padding: 40px;
-  position: relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  min-height: 1120px;
-  box-sizing: border-box;
-}
-
-.banner img {
-  width: 100%;
-  margin-bottom: 30px;
-  max-width: 100%;
-  height: auto;
+.error-message {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
   display: block;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fetch-btn, .download-btn, .send-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.fetch-btn {
+  background-color: #007bff;
+  color: white;
+  width: 100%;
+}
+
+.fetch-btn:hover {
+  background-color: #0069d9;
+}
+
+.download-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.download-btn:hover {
+  background-color: #218838;
+}
+
+.send-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.send-btn:hover {
+  background-color: #c82333;
+}
+
+.offer-letter {
+  flex: 1;
+  background: white;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: auto;
+  min-height: 1123px;
+  overflow: hidden;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+}
+
 .watermark {
-  position: absolute;
+  position: absolute;  /* Changed from fixed to absolute */
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%;  /* Changed from right to left */
+  transform: translate(-50%, -30%) scale(1.5);  /* Uncommented and necessary for centering */
   opacity: 0.1;
-  z-index: 0;
+  z-index: 1;  /* Changed to -1 to ensure it stays behind content */
   pointer-events: none;
 }
 
 .watermark img {
-  width: 400px;
-  max-width: 80%;
+  max-width: 300px;
+  max-height: 300px;
 }
+
 
 .letter-content {
   position: relative;
-  z-index: 1;
+  padding: 25px;
+  color: #333;
+  font-size: 13px;
+  line-height: 1.5;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  height: 100%;
 }
 
-.letter-content h1 {
+.banner {
   text-align: center;
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-weight: bold;
+  padding: 15px 0 10px 0;
 }
 
-.letter-content .date {
+.banner img {
+  max-height: 80px;
+  width: auto;
+}
+
+.header-line {
+  height: 2px;
+  background-color: #2c3e50;
+  margin: 10px 0;
+}
+
+.letter-head {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.letter-head h1 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.ref-no {
+  font-size: 12px;
+  color: #666;
+}
+
+.date {
   text-align: right;
   margin-bottom: 30px;
+  font-size: 12px;
 }
 
-.letter-content .salutation {
-  margin-bottom: 20px;
-}
-
-.letter-content p {
+.salutation {
   margin-bottom: 15px;
-  line-height: 1.6;
+}
+
+.para {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.terms-section {
+  margin: 20px 0;
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.terms-section h2 {
+  font-size: 15px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.term-row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.term-label {
+  font-weight: 600;
+  width: 160px;
+}
+
+h3 {
   font-size: 14px;
+  margin: 20px 0 10px 0;
+  color: #2c3e50;
 }
 
-.letter-content h2 {
-  font-size: 18px;
-  margin: 25px 0 15px 0;
-  font-weight: bold;
-}
-
-.letter-content ul {
+.responsibilities {
   margin-left: 20px;
   margin-bottom: 20px;
-  padding-left: 20px;
 }
 
-.letter-content li {
+.responsibilities li {
   margin-bottom: 8px;
-  font-size: 14px;
+}
+
+.closing {
+  margin: 25px 0 40px 0;
 }
 
 .signatures {
   display: flex;
   justify-content: space-between;
-  margin-top: 80px;
+  margin-top: 50px;
+  page-break-inside: avoid;
 }
 
-.signature {
+.signature-block {
   text-align: center;
   width: 45%;
+  page-break-inside: avoid;
 }
 
-.signature p:first-child {
-  margin-bottom: 40px;
-  height: 1px;
+.signature-image {
+  position: relative;
+  height: 60px;
+  display: inline-block;
 }
 
-.signature p:last-child {
-  font-weight: bold;
+.signature-image img {
+  max-height: 50px;
+  max-width: 100%;
 }
 
-/* Print-specific styles */
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  
-  #offer-letter,
-  #offer-letter * {
-    visibility: visible;
-  }
-  
-  #offer-letter {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-  }
-  
-  .watermark {
-    opacity: 0.1 !important;
-  }
-  
-  .form-section,
-  .download-btn {
-    display: none;
-  }
+.signature-image .stamp {
+  position: absolute;
+  right: 50%;
+  bottom: -10px;
+  transform: translateX(120%) translateY(-50%) scale(1.5) rotateZ(-30deg);
+  width: 50px;
+  opacity: 0.9;
+  z-index: 2;
 }
 
-/* Responsive styles */
+.signature-block p {
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.letter-body {
+  page-break-inside: avoid;
+}
+
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.confirm-send {
+  background: #dc3545 !important;
+}
+
 @media (max-width: 900px) {
   .offer-letter-container {
     flex-direction: column;
@@ -207,35 +315,32 @@
   }
   
   .offer-letter {
-    min-height: auto;
-    padding: 30px 20px;
-  }
-  
-  .watermark img {
-    width: 300px;
+    height: auto;
+    min-height: 1123px;
   }
 }
 
-@media (max-width: 500px) {
-  .offer-letter {
-    padding: 20px 15px;
+@media print {
+  body * {
+    visibility: hidden;
   }
   
-  .letter-content h1 {
-    font-size: 20px;
+  #offer-letter, #offer-letter * {
+    visibility: visible;
   }
   
-  .signatures {
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .signature {
+  #offer-letter {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
   }
   
-  .watermark img {
-    width: 250px;
+  .form-section {
+    display: none;
   }
 }
-

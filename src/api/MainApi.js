@@ -42,6 +42,8 @@ class API {
   static INTERN_SUBMIT_ASSIGNMENT = `${API.INTERNSHIPS_API}/intern-submit-assignment`
   static REJECT_FINAL_ASSIGNMENT = `${API.INTERNSHIPS_API}/reject-final-assignment`
   static ACCEPT_FINAL_ASSIGNMENT = `${API.INTERNSHIPS_API}/accept-final-assignment`
+  static GET_OFFER_LETTER_DETAILS = `${API.INTERNSHIPS_API}/get-offer-letter-details`
+  static SEND_OFFER_LETTER = `${API.INTERNSHIPS_API}/send-offer-letter`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;
