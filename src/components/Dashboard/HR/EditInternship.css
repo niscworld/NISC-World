@@ -2,7 +2,7 @@
   padding: 2rem;
   color: var(--black);
   min-height: 100vh;
-  background-color: var(--pure-white);
+  /* background-color: var(--pure-white); */
   box-sizing: border-box;
 }
 

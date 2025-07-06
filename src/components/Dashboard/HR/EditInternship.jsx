@@ -54,6 +54,7 @@ function EditInternship() {
   };
 
   const handleSelect = (internship) => {
+    console.log(internship);
     setSelectedInternship({
       ...internship,
       is_visible: internship.is_visible ?? true,
@@ -148,7 +149,10 @@ function EditInternship() {
         )
       ) : (
         <div className="modal-content">
-          <button className="back-button" onClick={() => setSelectedInternship(null)}>
+          <button
+            className="back-button"
+            onClick={() => setSelectedInternship(null)}
+          >
             🔙
           </button>
           <h4>Edit: {selectedInternship.title}</h4>
@@ -209,6 +213,16 @@ function EditInternship() {
                 name="stipend"
                 value={selectedInternship.stipend}
                 onChange={handleChange}
+              />
+            </label>
+
+            <label>
+              HR ID
+              <input
+                name="hr_profile_id"
+                value={selectedInternship.hr_profile_id || ''}
+                onChange={handleChange}
+                required
               />
             </label>
 

@@ -1,3 +1,4 @@
+/* Form section styles */
 .offer-letter-container {
   display: flex;
   padding: 20px;
@@ -92,50 +93,45 @@
   background-color: #c82333;
 }
 
-.offer-letter {
-  flex: 1;
+/* PDF styles */
+.offer-letter-pdf {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
   background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  height: auto;
-  min-height: 1123px;
   overflow: hidden;
-  page-break-after: avoid;
-  page-break-inside: avoid;
-  display: flex;
-  flex-direction: column;
+}
+
+.letter-content {
+  padding: 20mm;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .watermark {
-  position: absolute;  /* Changed from fixed to absolute */
+  position: absolute;
   top: 50%;
-  left: 50%;  /* Changed from right to left */
-  transform: translate(-50%, -30%) scale(1.5);  /* Uncommented and necessary for centering */
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-0deg);
   opacity: 0.1;
-  z-index: 1;  /* Changed to -1 to ensure it stays behind content */
+  z-index: 0;
   pointer-events: none;
 }
 
 .watermark img {
-  max-width: 300px;
-  max-height: 300px;
-}
-
-
-.letter-content {
-  position: relative;
-  padding: 25px;
-  color: #333;
-  font-size: 13px;
-  line-height: 1.5;
-  page-break-after: avoid;
-  page-break-inside: avoid;
-  height: 100%;
+  width: 400px;
+  height: auto;
 }
 
 .pdf_banner {
   text-align: center;
-  padding: 15px 0 10px 0;
+  margin-bottom: 15px;
 }
 
 .pdf_banner img {
@@ -155,7 +151,7 @@
 }
 
 .letter-head h1 {
-  font-size: 20px;
+  font-size: 22px;
   color: #2c3e50;
   margin-bottom: 5px;
   font-weight: 600;
@@ -189,7 +185,7 @@
 }
 
 .terms-section h2 {
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 15px;
   color: #2c3e50;
   text-align: center;
@@ -208,7 +204,7 @@
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 15px;
   margin: 20px 0 10px 0;
   color: #2c3e50;
 }
@@ -230,19 +226,20 @@ h3 {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-  page-break-inside: avoid;
+  position: absolute;
+  bottom: 40px;
+  width: calc(100% - 40mm);
 }
 
 .signature-block {
   text-align: center;
   width: 45%;
-  page-break-inside: avoid;
 }
 
 .signature-image {
   position: relative;
   height: 60px;
-  display: inline-block;
+  margin-bottom: -10px;
 }
 
 .signature-image img {
@@ -253,11 +250,10 @@ h3 {
 .signature-image .stamp {
   position: absolute;
   right: 50%;
-  bottom: -10px;
-  transform: translateX(120%) translateY(-30%) scale(1.5) rotateZ(-30deg);
+  /* bottom: -10px; */
+  transform: translateX(100%) translateY(10%) scale(1.5) rotateZ(-30deg);
   width: 50px;
   opacity: 0.9;
-  z-index: 2;
 }
 
 .signature-block p {
@@ -265,10 +261,7 @@ h3 {
   font-size: 12px;
 }
 
-.letter-body {
-  page-break-inside: avoid;
-}
-
+/* Modal styles */
 .confirmation-modal {
   position: fixed;
   top: 0;
@@ -287,9 +280,8 @@ h3 {
   padding: 20px;
   border-radius: 8px;
   width: 80%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow: auto;
+  max-width: 400px;
+  color: black;
 }
 
 .modal-buttons {
@@ -299,10 +291,24 @@ h3 {
   margin-top: 20px;
 }
 
-.confirm-send {
-  background: #dc3545 !important;
+.modal-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
+.modal-buttons button:first-child {
+  background: #6c757d;
+  color: white;
+}
+
+.confirm-send {
+  background: #dc3545 !important;
+  color: white !important;
+}
+
+/* Responsive styles */
 @media (max-width: 900px) {
   .offer-letter-container {
     flex-direction: column;
@@ -314,33 +320,36 @@ h3 {
     margin-bottom: 30px;
   }
   
-  .offer-letter {
-    height: auto;
-    min-height: 1123px;
+  .offer-letter-pdf {
+    width: 100%;
+    min-height: auto;
   }
 }
 
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  
-  #offer-letter, #offer-letter * {
-    visibility: visible;
-  }
-  
-  #offer-letter {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
+  body {
     margin: 0;
-    box-shadow: none;
+    padding: 0;
+    background: white;
+  }
+  
+  .offer-letter-container {
+    padding: 0;
   }
   
   .form-section {
     display: none;
+  }
+  
+  .offer-letter-pdf {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    height: 297mm;
+  }
+  
+  .letter-content {
+    padding: 20mm;
   }
 }

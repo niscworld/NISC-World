@@ -5,14 +5,15 @@ import niscBanner from './assets/nisc_banner.png';
 import stamp from './assets/stamp.png';
 import API from '../../../api/MainApi';
 import logo from "./assets/logo.png";
+import sign from "./assets/sign.png";
 import { toast } from 'react-toastify';
 
 const OfferLetter = () => {
   const [internId, setInternId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const [showPreview, setShowPreview] = useState(false);
   const [showSendConfirmation, setShowSendConfirmation] = useState(false);
+  const [hrSignature, setHrSignature] = useState(sign);
 
   const [offerData, setOfferData] = useState({
     fullname: '',
@@ -25,6 +26,39 @@ const OfferLetter = () => {
     hrId: '',
     offerDate: new Date().toLocaleDateString('en-GB')
   });
+
+  useEffect(() => {
+    const loadHrSignature = async () => {
+      if (!offerData.hrId) {
+        setHrSignature(sign);
+        return;
+      }
+
+      try {
+        const publicImg = new Image();
+        publicImg.src = `/${offerData.hrId}.png`;
+        
+        publicImg.onload = () => {
+          setHrSignature(publicImg.src);
+        };
+        
+        publicImg.onerror = async () => {
+          try {
+            const module = await import(`./assets/${offerData.hrId}.png`);
+            setHrSignature(module.default);
+          } catch (error) {
+            console.error('HR signature not found in assets:', error);
+            setHrSignature(sign);
+          }
+        };
+      } catch (error) {
+        console.error('Error loading HR signature:', error);
+        setHrSignature(sign);
+      }
+    };
+
+    loadHrSignature();
+  }, [offerData.hrId]);
 
   const fetchInternDetails = async () => {
     if (!internId) {
@@ -59,34 +93,38 @@ const OfferLetter = () => {
     }
   };
 
-  const generatePDF = (forPreview = false) => {
+  const generatePDF = async () => {
+    // Wait for all images to load
+    await Promise.all(
+      Array.from(document.images).map(img => 
+        img.complete ? Promise.resolve() : new Promise(resolve => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        })
+      )
+    );
+
     const element = document.getElementById('offer-letter');
     const opt = {
-      margin: [10, 10],
+      margin: 0,
       filename: `NISC_Internship_Offer_${offerData.fullname.replace(/\s+/g, '_')}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
+      image: { type: 'jpeg', quality: 1 },
       html2canvas: { 
         scale: 2,
         scrollY: 0,
         letterRendering: true,
         useCORS: true,
-        allowTaint: true,
         width: 794,
-        height: 1123
+        height: 1123,
+        windowWidth: 794
       },
       jsPDF: { 
         unit: 'mm', 
         format: 'a4', 
         orientation: 'portrait'
-      },
-      pagebreak: { 
-        mode: ['avoid-all', 'css', 'legacy'] 
       }
     };
 
-    if (forPreview) {
-      return html2pdf().set(opt).from(element).outputPdf('bloburl');
-    }
     return html2pdf().set(opt).from(element).save();
   };
 
@@ -94,19 +132,28 @@ const OfferLetter = () => {
     setIsLoading(true);
     
     try {
+      await Promise.all(
+        Array.from(document.images).map(img => 
+          img.complete ? Promise.resolve() : new Promise(resolve => {
+            img.onload = resolve;
+            img.onerror = resolve;
+          })
+        )
+      );
+
       const element = document.getElementById('offer-letter');
       const opt = {
-        margin: [10, 10],
+        margin: 0,
         filename: `NISC_Internship_Offer_${offerData.fullname.replace(/\s+/g, '_')}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 1 },
         html2canvas: { 
           scale: 2,
           scrollY: 0,
           letterRendering: true,
           useCORS: true,
-          allowTaint: true,
           width: 794,
-          height: 1123
+          height: 1123,
+          windowWidth: 794
         },
         jsPDF: { 
           unit: 'mm', 
@@ -204,7 +251,7 @@ const OfferLetter = () => {
             <div className="button-group">
               <button 
                 className="download-btn"
-                onClick={() => generatePDF()}
+                onClick={generatePDF}
               >
                 Download PDF
               </button>
@@ -220,12 +267,12 @@ const OfferLetter = () => {
         )}
       </div>
 
-      <div id="offer-letter" className="offer-letter">
-  <div className="letter-content">
-    {/* Watermark placed here - will be centered within letter-content */}
-    <div className='watermark'>
-      <img src={logo} alt="Company Watermark" />
-    </div>
+      <div id="offer-letter" className="offer-letter-pdf">
+        <div className="letter-content">
+          <div className='watermark'>
+            <img src={logo} alt="Company Watermark" />
+          </div>
+          
           <div className="pdf_banner">
             <img src={niscBanner} alt="NISC Banner" />
             <div className="header-line"></div>
@@ -288,7 +335,14 @@ const OfferLetter = () => {
             <div className="signatures">
               <div className="signature-block">
                 <div className="signature-image">
-                  <img src={`./src/assets/${offerData.hrId}.png`} alt="HR Signature" />
+                  <img 
+                    src={hrSignature} 
+                    alt="HR Signature"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = sign;
+                    }}
+                  />
                   <img src={stamp} className="stamp" alt="Company Stamp" />
                 </div>
                 <p>{offerData.hrName} (HR)</p>
@@ -297,7 +351,7 @@ const OfferLetter = () => {
               
               <div className="signature-block">
                 <div className="signature-image">
-                  <img src={`./src/assets/sign.png`} alt="CEO Signature" width="120%" />
+                  <img src={sign} alt="CEO Signature" />
                   <img src={stamp} className="stamp" alt="Company Stamp" />
                 </div>
                 <p>Founder/CEO/CTO</p>
