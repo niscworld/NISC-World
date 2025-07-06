@@ -133,12 +133,12 @@
   height: 100%;
 }
 
-.banner {
+.pdf_banner {
   text-align: center;
   padding: 15px 0 10px 0;
 }
 
-.banner img {
+.pdf_banner img {
   max-height: 80px;
   width: auto;
 }
@@ -254,7 +254,7 @@ h3 {
   position: absolute;
   right: 50%;
   bottom: -10px;
-  transform: translateX(120%) translateY(-50%) scale(1.5) rotateZ(-30deg);
+  transform: translateX(120%) translateY(-30%) scale(1.5) rotateZ(-30deg);
   width: 50px;
   opacity: 0.9;
   z-index: 2;

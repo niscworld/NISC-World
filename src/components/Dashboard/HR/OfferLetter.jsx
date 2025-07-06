@@ -226,7 +226,7 @@ const OfferLetter = () => {
     <div className='watermark'>
       <img src={logo} alt="Company Watermark" />
     </div>
-          <div className="banner">
+          <div className="pdf_banner">
             <img src={niscBanner} alt="NISC Banner" />
             <div className="header-line"></div>
           </div>
@@ -297,7 +297,7 @@ const OfferLetter = () => {
               
               <div className="signature-block">
                 <div className="signature-image">
-                  <img src={`./src/assets/sign.png`} alt="CEO Signature" />
+                  <img src={`./src/assets/sign.png`} alt="CEO Signature" width="120%" />
                   <img src={stamp} className="stamp" alt="Company Stamp" />
                 </div>
                 <p>Founder/CEO/CTO</p>
