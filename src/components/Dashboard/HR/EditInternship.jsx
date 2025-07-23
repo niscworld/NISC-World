@@ -7,7 +7,9 @@ function EditInternship() {
   const [selectedInternship, setSelectedInternship] = useState(null);
   const [message, setMessage] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   useEffect(() => {
     fetchInternships();
@@ -31,9 +33,7 @@ function EditInternship() {
     try {
       const res = await fetch(API.GET_INTERNSHIPS_DETAILS, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestData),
       });
 
@@ -54,7 +54,6 @@ function EditInternship() {
   };
 
   const handleSelect = (internship) => {
-    console.log(internship);
     setSelectedInternship({
       ...internship,
       is_visible: internship.is_visible ?? true,
@@ -97,9 +96,7 @@ function EditInternship() {
     try {
       const res = await fetch(API.UPDATE_INTERNSHIPS, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
       });
 
@@ -117,6 +114,56 @@ function EditInternship() {
       setMessage('❌ Server error during update.');
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const handleConfirmClose = async () => {
+    console.log('Closing internship:', selectedInternship);
+    if (!selectedInternship || !selectedInternship.code) {
+      setMessage('❌ Internship code missing.');
+      return;
+    }
+
+    setIsClosing(true);
+    setShowConfirmModal(false);
+    setMessage('Closing internship...');
+
+    const user_id = localStorage.getItem('user_id');
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('position');
+
+    if (!user_id || !token || !role) {
+      setMessage('User not authenticated. Please log in.');
+      return;
+    }
+
+
+    try {
+      const res = await fetch(API.CLOSE_INTERNSHIP, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          internship_code: selectedInternship.code,
+          user_id,
+          token,
+          role,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setMessage('✅ Internship closed successfully.');
+        fetchInternships();
+        setSelectedInternship(null);
+      } else {
+        setMessage(result.message || '❌ Failed to close internship.');
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage('❌ Server error while closing internship.');
+    } finally {
+      setIsClosing(false);
     }
   };
 
@@ -139,7 +186,7 @@ function EditInternship() {
                   className="intern-card"
                   onClick={() => handleSelect(intern)}
                 >
-                  <h4>{intern.title}</h4>
+                  <h3>{intern.title}</h3>
                   <p>{intern.department}</p>
                   <button>Edit</button>
                 </li>
@@ -149,100 +196,51 @@ function EditInternship() {
         )
       ) : (
         <div className="modal-content">
-          <button
-            className="back-button"
-            onClick={() => setSelectedInternship(null)}
-          >
-            🔙
-          </button>
+          <button className="back-button" onClick={() => setSelectedInternship(null)}>🔙</button>
           <h4>Edit: {selectedInternship.title}</h4>
           <form onSubmit={(e) => { e.preventDefault(); handleUpdate(); }}>
             <label>
               Title
-              <input
-                name="title"
-                value={selectedInternship.title}
-                onChange={handleChange}
-                required
-              />
+              <input name="title" value={selectedInternship.title} onChange={handleChange} required />
             </label>
 
             <label>
               Description
-              <textarea
-                name="description"
-                value={selectedInternship.description}
-                onChange={handleChange}
-                required
-              />
+              <textarea name="description" value={selectedInternship.description} onChange={handleChange} required />
             </label>
 
             <label>
               Department
-              <input
-                name="department"
-                value={selectedInternship.department}
-                onChange={handleChange}
-                required
-              />
+              <input name="department" value={selectedInternship.department} onChange={handleChange} required />
             </label>
 
             <label>
               Duration
-              <input
-                name="duration"
-                value={selectedInternship.duration}
-                onChange={handleChange}
-                required
-              />
+              <input name="duration" value={selectedInternship.duration} onChange={handleChange} required />
             </label>
 
             <label>
               Location
-              <input
-                name="location"
-                value={selectedInternship.location}
-                onChange={handleChange}
-                required
-              />
+              <input name="location" value={selectedInternship.location} onChange={handleChange} required />
             </label>
 
             <label>
               Stipend
-              <input
-                name="stipend"
-                value={selectedInternship.stipend}
-                onChange={handleChange}
-              />
+              <input name="stipend" value={selectedInternship.stipend} onChange={handleChange} />
             </label>
 
             <label>
               HR ID
-              <input
-                name="hr_profile_id"
-                value={selectedInternship.hr_profile_id || ''}
-                onChange={handleChange}
-                required
-              />
+              <input name="hr_profile_id" value={selectedInternship.hr_profile_id || ''} onChange={handleChange} required />
             </label>
 
             <div className="checkbox-group">
               <label>
-                <input
-                  type="checkbox"
-                  name="is_visible"
-                  checked={selectedInternship.is_visible}
-                  onChange={handleChange}
-                />
+                <input type="checkbox" name="is_visible" checked={selectedInternship.is_visible} onChange={handleChange} />
                 Visible on internship page
               </label>
               <label>
-                <input
-                  type="checkbox"
-                  name="can_join"
-                  checked={selectedInternship.can_join}
-                  onChange={handleChange}
-                />
+                <input type="checkbox" name="can_join" checked={selectedInternship.can_join} onChange={handleChange} />
                 Can Join
               </label>
             </div>
@@ -251,8 +249,29 @@ function EditInternship() {
               <button type="submit" disabled={isUpdating}>
                 {isUpdating ? 'Saving...' : 'Save Changes'}
               </button>
+              <button
+                type="button"
+                className="close-button danger"
+                onClick={() => setShowConfirmModal(true)}
+                disabled={isClosing}
+              >
+                {isClosing ? 'Closing...' : '❌ Close Internship Completely'}
+              </button>
             </div>
           </form>
+        </div>
+      )}
+
+      {/* Confirmation Modal */}
+      {showConfirmModal && (
+        <div className="confirm-modal">
+          <div className="confirm-box">
+            <p>⚠️ Are you sure you want to <strong>permanently close</strong> this internship?</p>
+            <div className="confirm-actions">
+              <button onClick={handleConfirmClose} className="danger">Yes, Close</button>
+              <button onClick={() => setShowConfirmModal(false)}>Cancel</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

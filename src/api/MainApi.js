@@ -44,6 +44,7 @@ class API {
   static ACCEPT_FINAL_ASSIGNMENT = `${API.INTERNSHIPS_API}/accept-final-assignment`
   static GET_OFFER_LETTER_DETAILS = `${API.INTERNSHIPS_API}/get-offer-letter-details`
   static SEND_OFFER_LETTER = `${API.INTERNSHIPS_API}/send-offer-letter`
+  static VERIFY_INTERNSHIP = `${API.INTERNSHIPS_API}/verify-internship`
   
   // Dashboard
   static DASHBOARD = `${API.BASE_URL}/dashboard`;
@@ -58,6 +59,7 @@ class API {
   static DASHBOARD_HR = `${API.DASHBOARD}/hr`;
   static DASHBOARD_HR_ENDPOINT = `${API.DASHBOARD_HR}/api`;
   static SEND_MESSAGE_TO_APPLICANT = `${API.DASHBOARD_HR_ENDPOINT}/send-message-to-applicant`
+  static CLOSE_INTERNSHIP = `${API.DASHBOARD_HR_ENDPOINT}/close-internship`
 
   static DASHBOARD_OWNER = `${API.DASHBOARD}/owner`;
   static DASHBOARD_OWNER_API = `${API.DASHBOARD_OWNER}/api`;

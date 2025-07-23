@@ -156,7 +156,7 @@ function Internships() {
 
   return (
     <div className="internships-list">
-      <h3>Available Internships</h3>
+      <h3>Available Internships |  <a href="./internships/verify">Verify Internship</a> </h3>
 
       {loading && <p>Loading internships...</p>}
       {error && <p className="error">{error}</p>}

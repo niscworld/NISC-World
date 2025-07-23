@@ -35,6 +35,7 @@ function SubmitAssignment() {
         setIsSubmitted(result.submitted || false);
         if (result.submitted && result.url) {
           setUrl(result.url);
+          setGrade(result.grade || 'Not Graded');
         }
       } catch (error) {
         console.error('Error checking submission status:', error);
@@ -108,7 +109,8 @@ function SubmitAssignment() {
               </a>
             </u>
             <br />
-            Grade: {grade}
+            <br />
+            Score: {grade}
             <br />
             {/* Remarks: {remarks} */}
           </p>

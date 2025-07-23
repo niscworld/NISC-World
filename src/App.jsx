@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard.jsx';
 import Internships from './pages/Internships.jsx';
+import VerifyInternship from './pages/VerifyInternship.jsx';
+import VerifyInternshipID from './pages/VerifyInternshipID.jsx';
 import Login from './pages/Login.jsx';
 import NotFound from './pages/NotFound';
 import RefundPolicy from './pages/RefundPolicy.jsx';
@@ -76,6 +78,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/internships" element={<Internships />} />
+          <Route path="/internships/verify" element={<VerifyInternship />} />
+          <Route path="/internship/verify/:internshipId" element={<VerifyInternshipID />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
